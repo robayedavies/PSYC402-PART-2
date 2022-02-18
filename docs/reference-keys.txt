@@ -22,3 +22,8 @@ support-or-contact
 psyc402-part-2-week-16
 pre-lab-activity-1-getting-ready-for-the-lab-class
 pre-lab-activity-1-get-your-files-ready-for-the-lab-class
+fig:pporteng
+the-approach-we-take
+targets
+book-chapter
+the-data-we-will-work-with-brazilian-school-children
