@@ -1,0 +1,17 @@
+introduction
+psyc122-part-2-week-16
+welcome
+our-learning-goals
+resources-for-you
+lectures-video-recordings
+readings
+pre-lab-activity-1
+survey-information
+pre-lab-activity-1-alternative
+pre-lab-activity-2-getting-ready-for-the-lab-class
+get-your-files-ready
+review-the-how-to-guide
+lab-activity
+what-is-in-the-activity-.r-file
+tasks
+what-is-in-the-data-files

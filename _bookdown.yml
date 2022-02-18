@@ -1,0 +1,6 @@
+book_filename: "PSYC402 part 2"
+repo: https://github.com/robayedavies/PSYC402-PART-2.git
+output_dir: docs
+rmd_files: 
+clean: [packages.bib, bookdown.bbl]
+new_session: yes
