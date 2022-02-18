@@ -29,11 +29,11 @@ output:
 
 > Rob Davies
 
-# PSYC122 Part 2 Week 16
+# PSYC402 Part 2 Week 16
 
 ## Welcome
 
-Welcome to your overview of the materials and guidance you will work with in **PSYC122 Week 16**.
+Welcome to your overview of the materials and guidance you will work with in **PSYC402 Week 16**.
 
 We will complete four classes in weeks 16-19.
 These classes are designed to help students to revise and put into practice some of the key ideas and skills you have been developing in the first year research methods modules *PSYC121, PSYC123 and PSYC124*.
@@ -51,7 +51,7 @@ In these classes, we will complete a research project to answer the research que
 1. What person attributes predict success in understanding?
 2. Can people accurately evaluate whether they correctly understand written health information?
 
-We will present our PSYC122 lessons in the context of this research project because we think that this *context* will help you to make sense of the data, and to see why we ask you to practice the skills we are teaching.
+We will present our PSYC402 lessons in the context of this research project because we think that this *context* will help you to make sense of the data, and to see why we ask you to practice the skills we are teaching.
 
 We will be revisiting some of the ideas and techniques you have seen introduced in previous classes.
 This is to give you the opportunity to revise and consolidate your learning.
@@ -106,7 +106,7 @@ We do not provide further reading but you may find it helpful to take another lo
 ## Pre-lab activity 1
 
 In weeks 16-19, we will be working together on a research project to investigate how people vary in their response to health advice.
-Completing the project involves collecting responses from PSYC122 students.
+Completing the project involves collecting responses from PSYC402 students.
 In our class activities, we can then analyze the data we collect.
 
 To enter your responses, we invite you to complete a short survey.
@@ -138,7 +138,7 @@ All responses will be recorded completely anonymously.
 
 ## Pre-lab activity 1 alternative
 
-If you do not want to complete the survey, we invite you to read the pre-registered research plan for the *PSYC122 health advice* research project.
+If you do not want to complete the survey, we invite you to read the pre-registered research plan for the *PSYC402 health advice* research project.
 
 [Read the project pre-registration](https://osf.io/p6fsc/){target="_blank"}
 
@@ -155,16 +155,16 @@ The folder includes data files:
 
 and code files:
 
-- `2021-22-PSYC122-w16-activity.R`
-- `2021-22-PSYC122-w16-how-to.R`
+- `2021-22-PSYC402-w16-activity.R`
+- `2021-22-PSYC402-w16-how-to.R`
 
-You will use `2021-22-PSYC122-w16-how-to.R` in the lab activity.
+You will use `2021-22-PSYC402-w16-how-to.R` in the lab activity.
 
 ### Review the how-to guide
 
 We show you how to do everything you need to do in the lab activity (see the next section) in the `how-to` guide.
 
-The guide comprises an .R file `2021-22-PSYC122-w16-how-to.R` with code and advice, and a video showing you how the code works.
+The guide comprises an .R file `2021-22-PSYC402-w16-how-to.R` with code and advice, and a video showing you how the code works.
 The code in the .R file was written to work with the data file `study-one-general-participants.csv`.
 
 In the video, I work my way through the R code, step-by-step, explaining what each line of code does.
@@ -175,17 +175,17 @@ It is completely optional but I have provided the video because students have to
 
 ## Lab activity
 
-In the lab activity .R file `2021-22-PSYC122-w16-activity.R`, you will work with data from a study about how people respond to guidance about a variety of health topics (general topics):
+In the lab activity .R file `2021-22-PSYC402-w16-activity.R`, you will work with data from a study about how people respond to guidance about a variety of health topics (general topics):
 
 - `study-two-general-participants.csv`
 
-The data are similar in format to the response data we are collecting as part of the PSYC122 project.
+The data are similar in format to the response data we are collecting as part of the PSYC402 project.
 
 The activity .R file and the data .csv file can be downloaded from:
 
 [122_week16_forStudents.zip](files/week-16/122_week16_forStudents.zip)
 
-Or you can download it from the module Moodle page for PSYC122:
+Or you can download it from the module Moodle page for PSYC402:
 
 [Link to Moodle](https://modules.lancaster.ac.uk/course/view.php?id=35319#section-9){target="_blank"}
 
@@ -210,9 +210,9 @@ In the activity, we are going to work through the following tasks.
 6. Draw histograms to examine the distributions of variables -- using `ggplot()` and `geom_histogram()`
 7. Edit the appearance of *one variable* histogram plot step-by-step
 
-The activity `2021-22-PSYC122-w16-activity.R` file takes you through the tasks, one by one.
+The activity `2021-22-PSYC402-w16-activity.R` file takes you through the tasks, one by one.
 
-If you are unsure about what you need to do, check in the `how-to` guide: look at the advice in `2021-22-PSYC122-w16-how-to.R` or watch the accompanying video.
+If you are unsure about what you need to do, check in the `how-to` guide: look at the advice in `2021-22-PSYC402-w16-how-to.R` or watch the accompanying video.
 
 You will see that you can match a task in the `activity` to the same task in the `how-to`.
 The `how-to` shows you what function you need and how you should write the function code.

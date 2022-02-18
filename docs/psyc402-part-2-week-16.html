@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 PSYC402 Part 2 Week 16 | PSYC402 Statistics for Psychologists – Part 2</title>
+  <meta name="description" content="Course content for PSYC402 Part 2 (Lancaster University)" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 PSYC402 Part 2 Week 16 | PSYC402 Statistics for Psychologists – Part 2" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Course content for PSYC402 Part 2 (Lancaster University)" />
+  <meta name="github-repo" content="https://github.com/robayedavies/PSYC402-PART-2.git" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 PSYC402 Part 2 Week 16 | PSYC402 Statistics for Psychologists – Part 2" />
+  
+  <meta name="twitter:description" content="Course content for PSYC402 Part 2 (Lancaster University)" />
+  
+
+<meta name="author" content="Rob Davies" />
+
+
+<meta name="date" content="2022-02-18" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">PSYC402 -- part 2</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#welcome-to-github-pages"><i class="fa fa-check"></i><b>1.1</b> Welcome to GitHub Pages</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="index.html"><a href="index.html#markdown"><i class="fa fa-check"></i><b>1.1.1</b> Markdown</a></li>
+<li class="chapter" data-level="1.1.2" data-path="index.html"><a href="index.html#jekyll-themes"><i class="fa fa-check"></i><b>1.1.2</b> Jekyll Themes</a></li>
+<li class="chapter" data-level="1.1.3" data-path="index.html"><a href="index.html#support-or-contact"><i class="fa fa-check"></i><b>1.1.3</b> Support or Contact</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="psyc402-part-2-week-16.html"><a href="psyc402-part-2-week-16.html"><i class="fa fa-check"></i><b>2</b> PSYC402 Part 2 Week 16</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="psyc402-part-2-week-16.html"><a href="psyc402-part-2-week-16.html#welcome"><i class="fa fa-check"></i><b>2.1</b> Welcome</a></li>
+<li class="chapter" data-level="2.2" data-path="psyc402-part-2-week-16.html"><a href="psyc402-part-2-week-16.html#our-learning-goals"><i class="fa fa-check"></i><b>2.2</b> Our learning goals</a></li>
+<li class="chapter" data-level="2.3" data-path="psyc402-part-2-week-16.html"><a href="psyc402-part-2-week-16.html#resources-for-you"><i class="fa fa-check"></i><b>2.3</b> Resources for you</a></li>
+<li class="chapter" data-level="2.4" data-path="psyc402-part-2-week-16.html"><a href="psyc402-part-2-week-16.html#lectures-video-recordings"><i class="fa fa-check"></i><b>2.4</b> Lectures: video recordings</a></li>
+<li class="chapter" data-level="2.5" data-path="psyc402-part-2-week-16.html"><a href="psyc402-part-2-week-16.html#readings"><i class="fa fa-check"></i><b>2.5</b> Readings</a></li>
+<li class="chapter" data-level="2.6" data-path="psyc402-part-2-week-16.html"><a href="psyc402-part-2-week-16.html#pre-lab-activity-1"><i class="fa fa-check"></i><b>2.6</b> Pre-lab activity 1</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="psyc402-part-2-week-16.html"><a href="psyc402-part-2-week-16.html#survey-information"><i class="fa fa-check"></i><b>2.6.1</b> Survey information</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="psyc402-part-2-week-16.html"><a href="psyc402-part-2-week-16.html#pre-lab-activity-1-alternative"><i class="fa fa-check"></i><b>2.7</b> Pre-lab activity 1 alternative</a></li>
+<li class="chapter" data-level="2.8" data-path="psyc402-part-2-week-16.html"><a href="psyc402-part-2-week-16.html#pre-lab-activity-2-getting-ready-for-the-lab-class"><i class="fa fa-check"></i><b>2.8</b> Pre-lab activity 2: Getting ready for the lab class</a>
+<ul>
+<li class="chapter" data-level="2.8.1" data-path="psyc402-part-2-week-16.html"><a href="psyc402-part-2-week-16.html#get-your-files-ready"><i class="fa fa-check"></i><b>2.8.1</b> Get your files ready</a></li>
+<li class="chapter" data-level="2.8.2" data-path="psyc402-part-2-week-16.html"><a href="psyc402-part-2-week-16.html#review-the-how-to-guide"><i class="fa fa-check"></i><b>2.8.2</b> Review the how-to guide</a></li>
+</ul></li>
+<li class="chapter" data-level="2.9" data-path="psyc402-part-2-week-16.html"><a href="psyc402-part-2-week-16.html#lab-activity"><i class="fa fa-check"></i><b>2.9</b> Lab activity</a>
+<ul>
+<li class="chapter" data-level="2.9.1" data-path="psyc402-part-2-week-16.html"><a href="psyc402-part-2-week-16.html#what-is-in-the-activity-.r-file"><i class="fa fa-check"></i><b>2.9.1</b> What is in the activity .R file?</a></li>
+<li class="chapter" data-level="2.9.2" data-path="psyc402-part-2-week-16.html"><a href="psyc402-part-2-week-16.html#tasks"><i class="fa fa-check"></i><b>2.9.2</b> Tasks</a></li>
+<li class="chapter" data-level="2.9.3" data-path="psyc402-part-2-week-16.html"><a href="psyc402-part-2-week-16.html#what-is-in-the-data-files"><i class="fa fa-check"></i><b>2.9.3</b> What is in the data files</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">PSYC402 Statistics for Psychologists – Part 2</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="psyc402-part-2-week-16" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> PSYC402 Part 2 Week 16</h1>
+<div id="welcome" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Welcome</h2>
+<p>Welcome to your overview of the materials and guidance you will work with in <strong>PSYC402 Week 16</strong>.</p>
+<p>We will complete four classes in weeks 16-19.
+These classes are designed to help students to revise and put into practice some of the key ideas and skills you have been developing in the first year research methods modules <em>PSYC121, PSYC123 and PSYC124</em>.</p>
+<p>We will do this in the context of a live research project with potential real world impacts: the <strong>Clearly understood</strong> project.</p>
+<p>Our focus will be on <strong>what makes it easy or difficult for people to understand written health information</strong>.
+We encounter written health information all the time: in warnings signs, on medication labels, in clinics when we go to see the doctor, and online when we research things we are worried about.
+It is not always easy to understand this information.
+The problem is that it is unclear how health information should be communicated.
+As psychologists, we can help to improve health communication.</p>
+<p>In these classes, we will complete a research project to answer the research questions:</p>
+<ol style="list-style-type: decimal">
+<li>What person attributes predict success in understanding?</li>
+<li>Can people accurately evaluate whether they correctly understand written health information?</li>
+</ol>
+<p>We will present our PSYC402 lessons in the context of this research project because we think that this <em>context</em> will help you to make sense of the data, and to see why we ask you to practice the skills we are teaching.</p>
+<p>We will be revisiting some of the ideas and techniques you have seen introduced in previous classes.
+This is to give you the opportunity to revise and consolidate your learning.
+We will be extending your development with some new ideas, to strengthen your skills.</p>
+<p>Ultimately, we aim to contribute new findings from the data we will collect together.
+These new findings will, we hope, help to make the provision of health advice a bit more useful in future.</p>
+</div>
+<div id="our-learning-goals" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Our learning goals</h2>
+<p>In Week 16, we will ask you to do two things.</p>
+<p>First, we will ask you to do a pre-lab activity that involves completing a survey.
+Completing the survey will help you to make sense of the numbers you will be working with in the activities.
+Completing the pre-lab activity will help to teach you about the challenges of measurement, a key aspect of the scientific thinking skills we will help you grow:</p>
+<ul>
+<li><em>Scientific thinking</em>: from concerns to questions to results and critical evaluation</li>
+</ul>
+<p>Second, we wil ask you to do a set of practical tasks in the lab activity that are designed to consolidate your learning on <em>data visualization</em>.
+We will focus on the visualization of data distributions.
+We will be:</p>
+<ul>
+<li>Using histograms to examine the distributions of variables;</li>
+<li>And learning to edit the histograms so they are more effective.</li>
+</ul>
+</div>
+<div id="resources-for-you" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> Resources for you</h2>
+<p>You will see – below – links to the lectures, information about the data we will analyze, and an explanation of the activities.</p>
+<p>All the links to the lectures, and everything you need for your practical work class can <em>also</em> be found in the <strong>Week 16 files</strong> folder on Moodle, here:</p>
+<p><a href="https://modules.lancaster.ac.uk/course/view.php?id=35319#section-9" target="_blank">Link to Moodle</a></p>
+</div>
+<div id="lectures-video-recordings" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> Lectures: video recordings</h2>
+<p>The lecture material for this week is presented in three parts.
+Click on a link and your browser should open a tab showing the <em>Panopto</em> video for the lecture part.
+(You will need to be on campus or logged in to the university VPN to get access to the videos.)</p>
+<p><a href="https://dtu-panopto.lancs.ac.uk/Panopto/Pages/Viewer.aspx?id=dfdd3c63-d608-446f-9324-ae3f011ad107" target="_blank">Part 1 of 3</a></p>
+<p><a href="https://dtu-panopto.lancs.ac.uk/Panopto/Pages/Viewer.aspx?id=2df8cf1c-f577-4870-816a-ae3f011e841b" target="_blank">Part 2 of 3</a></p>
+<p><a href="https://dtu-panopto.lancs.ac.uk/Panopto/Pages/Viewer.aspx?id=17266295-94df-4b9f-baf3-ae3f012274e5" target="_blank">Part 3 of 3</a></p>
+</div>
+<div id="readings" class="section level2" number="2.5">
+<h2><span class="header-section-number">2.5</span> Readings</h2>
+<p>We do not provide further reading but you may find it helpful to take another look at the readings provided, previously, for your classes in weeks 11-13.</p>
+</div>
+<div id="pre-lab-activity-1" class="section level2" number="2.6">
+<h2><span class="header-section-number">2.6</span> Pre-lab activity 1</h2>
+<p>In weeks 16-19, we will be working together on a research project to investigate how people vary in their response to health advice.
+Completing the project involves collecting responses from PSYC402 students.
+In our class activities, we can then analyze the data we collect.</p>
+<p>To enter your responses, we invite you to complete a short survey.
+You can complete the survey here (just click on the web address to get started):</p>
+<p><a href="https://lancasteruni.eu.qualtrics.com/jfe/form/SV_0ww8HHxx172TPJs" target="_blank">Complete the survey</a></p>
+<div id="survey-information" class="section level3" number="2.6.1">
+<h3><span class="header-section-number">2.6.1</span> Survey information</h3>
+<p>The survey asks you to:</p>
+<ul>
+<li>complete some questions about who you are;</li>
+<li>and then answer some questions about what you know about some English words, about what you know about health matters, and about how you approach reading.</li>
+</ul>
+<p>The survey then asks you to:</p>
+<ul>
+<li>read five short extracts from patient information leaflets about different kinds of health issue;</li>
+<li>respond to some multiple choice questions about each extract;</li>
+<li>and rate how well you think you understand the advice.</li>
+</ul>
+<p>The survey should take about 20 minutes to complete.
+Some people will take less time, and some people might take a little more time.</p>
+<p>Taking part in the survey is <strong>completely voluntary</strong>.
+You can stop at any time without completing the survey if you do not want to finish it.
+If you do not want to do the survey, you can do an alternative activity (see below).</p>
+<p>All responses will be recorded completely anonymously.</p>
+</div>
+</div>
+<div id="pre-lab-activity-1-alternative" class="section level2" number="2.7">
+<h2><span class="header-section-number">2.7</span> Pre-lab activity 1 alternative</h2>
+<p>If you do not want to complete the survey, we invite you to read the pre-registered research plan for the <em>PSYC402 health advice</em> research project.</p>
+<p><a href="https://osf.io/p6fsc/" target="_blank">Read the project pre-registration</a></p>
+</div>
+<div id="pre-lab-activity-2-getting-ready-for-the-lab-class" class="section level2" number="2.8">
+<h2><span class="header-section-number">2.8</span> Pre-lab activity 2: Getting ready for the lab class</h2>
+<div id="get-your-files-ready" class="section level3" number="2.8.1">
+<h3><span class="header-section-number">2.8.1</span> Get your files ready</h3>
+<p>Download the <a href="files/week-16/122_week16_forStudents.zip">122_week16_forStudents.zip</a> files you need and upload them to your RStudio Server.</p>
+<p>The folder includes data files:</p>
+<ul>
+<li><code>study-one-general-participants.csv</code></li>
+<li><code>study-two-general-participants.csv</code></li>
+</ul>
+<p>and code files:</p>
+<ul>
+<li><code>2021-22-PSYC402-w16-activity.R</code></li>
+<li><code>2021-22-PSYC402-w16-how-to.R</code></li>
+</ul>
+<p>You will use <code>2021-22-PSYC402-w16-how-to.R</code> in the lab activity.</p>
+</div>
+<div id="review-the-how-to-guide" class="section level3" number="2.8.2">
+<h3><span class="header-section-number">2.8.2</span> Review the how-to guide</h3>
+<p>We show you how to do everything you need to do in the lab activity (see the next section) in the <code>how-to</code> guide.</p>
+<p>The guide comprises an .R file <code>2021-22-PSYC402-w16-how-to.R</code> with code and advice, and a video showing you how the code works.
+The code in the .R file was written to work with the data file <code>study-one-general-participants.csv</code>.</p>
+<p>In the video, I work my way through the R code, step-by-step, explaining what each line of code does.
+Watching the video takes about 20 minutes.
+It is completely optional but I have provided the video because students have told us they find it useful.</p>
+<p><a href="https://dtu-panopto.lancs.ac.uk/Panopto/Pages/Viewer.aspx?id=fc290f97-5085-4b92-8870-ae3f01294230" target="_blank">Watch the how-to guide</a></p>
+</div>
+</div>
+<div id="lab-activity" class="section level2" number="2.9">
+<h2><span class="header-section-number">2.9</span> Lab activity</h2>
+<p>In the lab activity .R file <code>2021-22-PSYC402-w16-activity.R</code>, you will work with data from a study about how people respond to guidance about a variety of health topics (general topics):</p>
+<ul>
+<li><code>study-two-general-participants.csv</code></li>
+</ul>
+<p>The data are similar in format to the response data we are collecting as part of the PSYC402 project.</p>
+<p>The activity .R file and the data .csv file can be downloaded from:</p>
+<p><a href="files/week-16/122_week16_forStudents.zip">122_week16_forStudents.zip</a></p>
+<p>Or you can download it from the module Moodle page for PSYC402:</p>
+<p><a href="https://modules.lancaster.ac.uk/course/view.php?id=35319#section-9" target="_blank">Link to Moodle</a></p>
+<div id="what-is-in-the-activity-.r-file" class="section level3" number="2.9.1">
+<h3><span class="header-section-number">2.9.1</span> What is in the activity .R file?</h3>
+<p>We will take things step-by-step.
+We will split .R scripts into parts, tasks and questions:</p>
+<ul>
+<li>different parts for different phases of the analysis workflow;</li>
+<li>different tasks for different steps in each phase;</li>
+<li>different questions to examine different ideas or coding steps.</li>
+</ul>
+</div>
+<div id="tasks" class="section level3" number="2.9.2">
+<h3><span class="header-section-number">2.9.2</span> Tasks</h3>
+<p>In the activity, we are going to work through the following tasks.</p>
+<ol style="list-style-type: decimal">
+<li>Empty the R environment – using <code>rm(list=ls())</code></li>
+<li>Load relevant libraries – using <code>library()</code></li>
+<li>Read in the data file – using <code>read_csv()</code></li>
+<li>Inspect the data – using <code>head()</code> and <code>summary()</code></li>
+<li>Change the type classification of a variable in the data – using <code>as.factor()</code></li>
+<li>Draw histograms to examine the distributions of variables – using <code>ggplot()</code> and <code>geom_histogram()</code></li>
+<li>Edit the appearance of <em>one variable</em> histogram plot step-by-step</li>
+</ol>
+<p>The activity <code>2021-22-PSYC402-w16-activity.R</code> file takes you through the tasks, one by one.</p>
+<p>If you are unsure about what you need to do, check in the <code>how-to</code> guide: look at the advice in <code>2021-22-PSYC402-w16-how-to.R</code> or watch the accompanying video.</p>
+<p>You will see that you can match a task in the <code>activity</code> to the same task in the <code>how-to</code>.
+The <code>how-to</code> shows you what function you need and how you should write the function code.
+You will need to change the names of the dataset or the variables to complete the tasks in the activity.</p>
+<p>This process of adapting demonstration code is a process critical to data literacy and to effective problem solving in working with data in psychological science.</p>
+</div>
+<div id="what-is-in-the-data-files" class="section level3" number="2.9.3">
+<h3><span class="header-section-number">2.9.3</span> What is in the data files</h3>
+<p>Each of the data files we will work with has a similar structure.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="psyc402-part-2-week-16.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># head(study.two.gen)</span></span></code></pre></div>
+<p>You can see the columns:</p>
+<ul>
+<li><code>participant_ID</code> participant code</li>
+<li><code>mean.acc</code> average accuracy of response to questions testing understanding of health guidance</li>
+<li><code>mean.self</code> average self-rated accuracy of understanding of health guidance</li>
+<li><code>study</code> varianble coding for what study the data were collected in</li>
+<li><code>AGE</code> age in years</li>
+<li><code>HLVA</code> health literacy test score</li>
+<li><code>SHIPLEY</code> vocabulary knowledge test score</li>
+<li><code>FACTOR3</code> reading strategy survey score</li>
+<li><code>GENDER</code> gender code</li>
+<li><code>EDUCATION</code> education level code</li>
+<li><code>ETHNICITY</code> ethnicity (Office National Statistics categories) code</li>
+</ul>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

@@ -15,3 +15,8 @@ lab-activity
 what-is-in-the-activity-.r-file
 tasks
 what-is-in-the-data-files
+welcome-to-github-pages
+markdown
+jekyll-themes
+support-or-contact
+psyc402-part-2-week-16
