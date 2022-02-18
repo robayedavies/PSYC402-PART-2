@@ -53,7 +53,7 @@ This investment is designed to give you a specific, important, advantage in your
 It is now clear that someone who works in psychological research *has* to know about multilevel or hierarchically structured data, and has to know how to apply multilevel models (or mixed-effects models).
 Growth in the popularity of these kinds of analysis has been very very rapid, and it is now, effectively, the standard or default method for professional data analysis in most areas of psychological and other social or clinical sciences (or it soon will be).
 
-```{r pporteng, fig.cap = 'Plot of child grades, comparing English with Portuguese grades, shown separately for each school class', warning=FALSE, message=FALSE, echo=FALSE, fig.width=6, fig.height=6}
+```{r pporteng, fig.cap = 'Plot of child English and Portuguese grades, from the Golino and Gomes (2014) dataset, shown separately for each school class', warning=FALSE, message=FALSE, echo=FALSE, fig.width=6, fig.height=6}
 
 brazil %>%
 ggplot(aes(x = portuguese, y = english)) +
@@ -178,6 +178,23 @@ We will split .R scripts into parts, tasks and questions:
 ### Tasks
 
 In the activity, we are going to work through the following tasks.
+
+1. Load the libraries we need for the exercises
+2. Read in the data file we will be using: `BAFACALO_DATASET.RData`
+3. We start by selecting the variables we want -- using `select()`
+4. Take missing values out of the brazil data -- using `na.omit()`
+5. Get R to treat a variable as a type object of the kind required -- using the `as.numeric()` or `as.factor()` functions
+6. Experiment with variable coercion
+7. Visualize the relationship between portuguese and english grades using a scatterplot
+8. Work on editing plots
+9. Analyze the relationship between english and portuguese grades in the brazil data -- using `lm()`
+10. Exercise: adapt the `lm()` code to do a different analysis
+11. Plot the relationship between english and portuguese grades separately for each class using `facet_wrap`
+12. Practice your `facet_wrap()` skills
+13. Run a linear mixed-effects analysis of the relationship between english and portuguese grades using `lmer()`
+14. Exercise mixed-effects model coding
+
+There are some extension exercises you can use to develop your coding skills.
 
 ### The data we will work with: Brazilian school children
 

@@ -122,9 +122,9 @@ This investment is designed to give you a specific, important, advantage in your
 <p>It is now clear that someone who works in psychological research <em>has</em> to know about multilevel or hierarchically structured data, and has to know how to apply multilevel models (or mixed-effects models).
 Growth in the popularity of these kinds of analysis has been very very rapid, and it is now, effectively, the standard or default method for professional data analysis in most areas of psychological and other social or clinical sciences (or it soon will be).</p>
 <div class="figure"><span id="fig:pporteng"></span>
-<img src="01-PSYC402-01-multilevel_files/figure-html/pporteng-1.png" alt="Plot of child grades, comparing English with Portuguese grades, shown separately for each school class" width="576" />
+<img src="01-PSYC402-01-multilevel_files/figure-html/pporteng-1.png" alt="Plot of child English and Portuguese grades, from the Golino and Gomes (2014) dataset, shown separately for each school class" width="576" />
 <p class="caption">
-Figure 2.1: Plot of child grades, comparing English with Portuguese grades, shown separately for each school class
+Figure 2.1: Plot of child English and Portuguese grades, from the Golino and Gomes (2014) dataset, shown separately for each school class
 </p>
 </div>
 <p>But, because it is relatively new, many professional psychologists struggle to understand why or how to use these methods effectively.
@@ -235,6 +235,23 @@ We will split .R scripts into parts, tasks and questions:</p>
 <div id="tasks" class="section level3" number="2.2.5">
 <h3><span class="header-section-number">2.2.5</span> Tasks</h3>
 <p>In the activity, we are going to work through the following tasks.</p>
+<ol style="list-style-type: decimal">
+<li>Load the libraries we need for the exercises</li>
+<li>Read in the data file we will be using: <code>BAFACALO_DATASET.RData</code></li>
+<li>We start by selecting the variables we want – using <code>select()</code></li>
+<li>Take missing values out of the brazil data – using <code>na.omit()</code></li>
+<li>Get R to treat a variable as a type object of the kind required – using the <code>as.numeric()</code> or <code>as.factor()</code> functions</li>
+<li>Experiment with variable coercion</li>
+<li>Visualize the relationship between portuguese and english grades using a scatterplot</li>
+<li>Work on editing plots</li>
+<li>Analyze the relationship between english and portuguese grades in the brazil data – using <code>lm()</code></li>
+<li>Exercise: adapt the <code>lm()</code> code to do a different analysis</li>
+<li>Plot the relationship between english and portuguese grades separately for each class using <code>facet_wrap</code></li>
+<li>Practice your <code>facet_wrap()</code> skills</li>
+<li>Run a linear mixed-effects analysis of the relationship between english and portuguese grades using <code>lmer()</code></li>
+<li>Exercise mixed-effects model coding</li>
+</ol>
+<p>There are some extension exercises you can use to develop your coding skills.</p>
 </div>
 <div id="the-data-we-will-work-with-brazilian-school-children" class="section level3" number="2.2.6">
 <h3><span class="header-section-number">2.2.6</span> The data we will work with: Brazilian school children</h3>

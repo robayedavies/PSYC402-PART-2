@@ -45,8 +45,8 @@ It is now clear that someone who works in psychological research *has* to know a
 Growth in the popularity of these kinds of analysis has been very very rapid, and it is now, effectively, the standard or default method for professional data analysis in most areas of psychological and other social or clinical sciences (or it soon will be).
 
 <div class="figure">
-<img src="01-PSYC402-01-multilevel_files/figure-html/pporteng-1.png" alt="Plot of child grades, comparing English with Portuguese grades, shown separately for each school class" width="576" />
-<p class="caption">(\#fig:pporteng)Plot of child grades, comparing English with Portuguese grades, shown separately for each school class</p>
+<img src="01-PSYC402-01-multilevel_files/figure-html/pporteng-1.png" alt="Plot of child English and Portuguese grades, from the Golino and Gomes (2014) dataset, shown separately for each school class" width="576" />
+<p class="caption">(\#fig:pporteng)Plot of child English and Portuguese grades, from the Golino and Gomes (2014) dataset, shown separately for each school class</p>
 </div>
 
 But, because it is relatively new, many professional psychologists struggle to understand why or how to use these methods effectively.
@@ -161,6 +161,23 @@ We will split .R scripts into parts, tasks and questions:
 ### Tasks
 
 In the activity, we are going to work through the following tasks.
+
+1. Load the libraries we need for the exercises
+2. Read in the data file we will be using: `BAFACALO_DATASET.RData`
+3. We start by selecting the variables we want -- using `select()`
+4. Take missing values out of the brazil data -- using `na.omit()`
+5. Get R to treat a variable as a type object of the kind required -- using the `as.numeric()` or `as.factor()` functions
+6. Experiment with variable coercion
+7. Visualize the relationship between portuguese and english grades using a scatterplot
+8. Work on editing plots
+9. Analyze the relationship between english and portuguese grades in the brazil data -- using `lm()`
+10. Exercise: adapt the `lm()` code to do a different analysis
+11. Plot the relationship between english and portuguese grades separately for each class using `facet_wrap`
+12. Practice your `facet_wrap()` skills
+13. Run a linear mixed-effects analysis of the relationship between english and portuguese grades using `lmer()`
+14. Exercise mixed-effects model coding
+
+There are some extension exercises you can use to develop your coding skills.
 
 ### The data we will work with: Brazilian school children
 
