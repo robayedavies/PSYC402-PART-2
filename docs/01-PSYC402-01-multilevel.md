@@ -186,3 +186,7 @@ The `BAFACALO_DATASET.RData` data were collected and shared online by Golina and
 Information about the background motivating the study, the methods of data collection, along with the dataset itself, can be found in the book chapter, and at the data journal article:
 
 [Golina and Gomes (2014) article](https://openpsychologydata.metajnl.com/articles/10.5334/jopd.af/){target="_blank"}
+
+## References
+
+Golino, H. F., & Gomes, C. M. A. (2014). Psychology data from the “BAFACALO project: The Brazilian Intelligence Battery based on two state-of-the-art models – Carroll’s Model and the CHC model”. *Journal of Open Psychology Data*, 2(1), e6. DOI: http://doi.org/10.5334/jopd.af
