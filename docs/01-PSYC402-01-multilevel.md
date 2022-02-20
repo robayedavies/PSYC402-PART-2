@@ -71,7 +71,7 @@ The approach we are going to take is:
 Our learning objectives include the development of key concepts and skills.
 
 - **concepts** --	multilevel data and multilevel modeling
-- **kills** -- visualization -- examine data within classes (sampling groups)
+- **skills** -- visualization -- examine data within classes (sampling groups)
 - **skills** -- run linear models over all data and within each class
 - **skills** -- use the `lmer()` function to fit models of multilevel data
 
