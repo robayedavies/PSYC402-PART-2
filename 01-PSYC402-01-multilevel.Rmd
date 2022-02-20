@@ -113,11 +113,11 @@ I have prepared materials that I suggest you use in this order:
 2. Read the book chapter, at least up to p.11, to get an outline view on the answers to the what, why, when and how questions on multilevel models.
 2. Download the week 16 files, and work your way throught the workbook.R, guided by the book chapter, at least as far as reading in the data and tidying it for analysis.
 
-- **In the session --**
+- **In the session**
 
 3. Work through the workbook.R, complete the tasks and answer the questions, in groups, guided by the code tips and the information in the chapter.
 
-- **after the session**
+- **After the session**
 
 4. Bring your questions to the Q&A session or post questions to the discussion forum.
 
