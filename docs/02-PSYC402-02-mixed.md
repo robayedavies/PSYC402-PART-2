@@ -47,7 +47,7 @@ But we now look at data where participants were asked to respond to a set of sti
 We use the same analysis procedure that we used for multilevel data: with one significant change which we shall identify and explain.
 
 In this webpage, I extract and present an outline taster summary (a little re-ordered) of a second chapter written for the course.
-Please go to the chapter for the full text: [02-mixed.pdf](files/week-18/02-mixed.pdf).
+Please go to the chapter for the authoritative version of the full text: [02-mixed.pdf](files/week-18/02-mixed.pdf).
 
 ### Introductory discussion
 
@@ -116,19 +116,17 @@ The critical extension, here, is to take the perspective in which we are not jus
 
 You will see -- below -- links to the lectures, information about the data we will analyze, and an explanation of the activities.
 
-The links and everything you need for your practical work class can *also* be found in the **Week 16 files** folder on Moodle, here:
+The links and everything you need for your practical work class can *also* be found in the **Week 18 files** folder on Moodle, here:
 
-[Link to Moodle](https://modules.lancaster.ac.uk/course/view.php?id=34085#section-10){target="_blank"}
-
-Our aim is to get started in our development of understanding how to use multilevel of mixed-effects models: we need to learn what they are, when and why they are needed, and how they should be used.
+[Link to Moodle](https://modules.lancaster.ac.uk/course/view.php?id=34085#section-12){target="_blank"}
 
 I have prepared materials that I suggest you use in this order:
 
 - **Before the lab session**
 
 1. Take a look at the lecture slides, watch the lecture video. The lecture is designed to work *only* as an outline summary of the materials. Learning will work best if you read the book chapter I wrote on the topic, and work through the exercises in the workbook.R
-2. Read the book chapter, at least up to p.11, to get an outline view on the answers to the what, why, when and how questions on multilevel models.
-2. Download the week 16 files, and work your way throught the workbook.R, guided by the book chapter, at least as far as reading in the data and tidying it for analysis.
+2. Read the book chapter, to develop understanding.
+2. Download the week 18 files, and work your way throught the workbook.R, guided by the book chapter, at least as far as reading in the data and tidying it for analysis.
 
 - **In the session**
 
@@ -157,6 +155,12 @@ Click on a link and your browser should open a tab showing the *Panopto* video f
 I wrote a book chapter to support PSYC402 student learning.
 
 You can download the chapter here [02-mixed.pdf](files/week-18/02-mixed.pdf).
+
+The chapter is useful to you in two ways:
+
+1. I use text and visualization to explain the core ideas in depth;
+2. I take you through each part of the code that you need to use, step-by-step, for your development of practical skills in data tidying, visualization, and analysis.
+
 
 ### Pre-lab activity 1: Get your files ready for the lab class
 
@@ -190,31 +194,44 @@ We will split .R scripts into parts, tasks and questions:
 
 In the activity, we are going to work through the following tasks.
 
-1. Load the libraries we need for the exercises
-2. Read in the data file we will be using: `BAFACALO_DATASET.RData`
-3. We start by selecting the variables we want -- using `select()`
-4. Take missing values out of the brazil data -- using `na.omit()`
-5. Get R to treat a variable as a type object of the kind required -- using the `as.numeric()` or `as.factor()` functions
-6. Experiment with variable coercion
-7. Visualize the relationship between portuguese and english grades using a scatterplot
-8. Work on editing plots
-9. Analyze the relationship between english and portuguese grades in the brazil data -- using `lm()`
-10. Exercise: adapt the `lm()` code to do a different analysis
-11. Plot the relationship between english and portuguese grades separately for each class using `facet_wrap`
-12. Practice your `facet_wrap()` skills
-13. Run a linear mixed-effects analysis of the relationship between english and portuguese grades using `lmer()`
-14. Exercise mixed-effects model coding
+First, I am going to show you **how to put together, tidy, and prepare** for analysis the kind of data you can expect to record or receive when you do a psychological experiment.
+You can skip the tasks in this part but checking the steps out will save you a lot of time if you are going to work with primary or original (i.e. raw and thus messy) data in your dissertation or in your future professional work.
 
-There are some extension exercises you can use to develop your coding skills.
+1. Load the libraries we need
+2. Read in the data files we will be using -- using variants of the `read_()` function
+3. Restructure behavioural (response) data -- using `pivot_longer()`
+4. Join data from different sources -- using `full_join()`
+5. Select just the variables you need -- using `select()`
+6. Filter observations by setting different kinds of conditions -- using `filter()`
+7. Remove missing values -- using `na.omit()`
+8. Produce an Excel-readable and shareable version of the tidied *prepared* dataset -- using `write_csv()`
 
-### The data we will work with: Brazilian school children
+Second, we work on our understanding and practical skills in modeling multilevel structured data.
+This part *is* essential to your attainment of our learning objectives.
 
-We will be working with data taken from a study on education outcomes in Brazilian children, reported by Golina and Gomes (2014).
-The `BAFACALO_DATASET.RData` data were collected and shared online by Golina and Gomes (2014). 
-Information about the background motivating the study, the methods of data collection, along with the dataset itself, can be found in the book chapter, and at the data journal article:
+9. Read in the pre-prepared data -- using `read_csv()` and defining `col_types` as we do so
+10. Visualizing effects with scatterplots -- using `geom_point()` and `geom_smooth()`
+11. Modeling effects while ignoring grouping -- using `lm()`
+12. Visualizing how effects may differ between groups (here, between participants) -- using `facet_wrap()`
+13. Fitting linear mixed-effects models -- using `lmer()`
+14. Learning to fit mixed-effects models with different kinds of random effects structure, examining the impact of these differences in structure
+15. Taking into account random effects associated with differences between participants, as well as differences between stimuli
 
-[Golina and Gomes (2014) article](https://openpsychologydata.metajnl.com/articles/10.5334/jopd.af/){target="_blank"}
+In the answers version of the workbook, I will provide optional extension exercises you can use to develop your coding skills, showing how I produced the plots in the slides and the book chapter.
+
+### The data we will work with: CP reading study
+
+This week, we will be working with the **CP reading study** dataset.
+CP tested 62 children (aged 116-151 months) on reading aloud in English.
+In the experimental reading task, she presented 160 words as stimuli.
+The same 160 words were presented to all children.
+The words were presented one at a time on a computer screen.
+Each time a word was shown, the children had to read the word out loud and their response was recorded.
+Thus, the CP reading study dataset comprised observations about the responses made by 62 children to 160 words.
+
+Ultimately, the CP dataset were incorporated in an analysis of the impact of age on reading skills over the life-span, reported by Davies, Arnell, Birchenough, Grimmond and Houlson (2017).
+You can find more details on the data and the methods in the book chapter associated with this class, and in that paper.
 
 ## References
 
-Golino, H. F., & Gomes, C. M. A. (2014). Psychology data from the “BAFACALO project: The Brazilian Intelligence Battery based on two state-of-the-art models – Carroll’s Model and the CHC model”. *Journal of Open Psychology Data*, 2(1), e6. DOI: http://doi.org/10.5334/jopd.af
+Davies, R. A., Arnell, R., Birchenough, J. M., Grimmond, D., \& Houlson, S. (2017). Reading through the life span: Individual differences in psycholinguistic effects. *Journal of Experimental Psychology: Learning, Memory, and Cognition*, 43, 1298.

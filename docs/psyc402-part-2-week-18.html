@@ -107,7 +107,7 @@
 <li class="chapter" data-level="3.2.3" data-path="psyc402-part-2-week-18.html"><a href="psyc402-part-2-week-18.html#pre-lab-activity-1-get-your-files-ready-for-the-lab-class-1"><i class="fa fa-check"></i><b>3.2.3</b> Pre-lab activity 1: Get your files ready for the lab class</a></li>
 <li class="chapter" data-level="3.2.4" data-path="psyc402-part-2-week-18.html"><a href="psyc402-part-2-week-18.html#lab-activity-1"><i class="fa fa-check"></i><b>3.2.4</b> Lab activity</a></li>
 <li class="chapter" data-level="3.2.5" data-path="psyc402-part-2-week-18.html"><a href="psyc402-part-2-week-18.html#tasks-1"><i class="fa fa-check"></i><b>3.2.5</b> Tasks</a></li>
-<li class="chapter" data-level="3.2.6" data-path="psyc402-part-2-week-18.html"><a href="psyc402-part-2-week-18.html#the-data-we-will-work-with-brazilian-school-children-1"><i class="fa fa-check"></i><b>3.2.6</b> The data we will work with: Brazilian school children</a></li>
+<li class="chapter" data-level="3.2.6" data-path="psyc402-part-2-week-18.html"><a href="psyc402-part-2-week-18.html#the-data-we-will-work-with-cp-reading-study"><i class="fa fa-check"></i><b>3.2.6</b> The data we will work with: CP reading study</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="psyc402-part-2-week-18.html"><a href="psyc402-part-2-week-18.html#references-1"><i class="fa fa-check"></i><b>3.3</b> References</a></li>
 </ul></li>
@@ -140,7 +140,7 @@
 But we now look at data where participants were asked to respond to a set of stimuli (words) so that our observations consist of recordings of the response made by each participant to each stimulus.
 We use the same analysis procedure that we used for multilevel data: with one significant change which we shall identify and explain.</p>
 <p>In this webpage, I extract and present an outline taster summary (a little re-ordered) of a second chapter written for the course.
-Please go to the chapter for the full text: <a href="files/week-18/02-mixed.pdf">02-mixed.pdf</a>.</p>
+Please go to the chapter for the authoritative version of the full text: <a href="files/week-18/02-mixed.pdf">02-mixed.pdf</a>.</p>
 <div id="introductory-discussion" class="section level3" number="3.1.1">
 <h3><span class="header-section-number">3.1.1</span> Introductory discussion</h3>
 <p>Many psychological studies involve scenarios in which the researcher samples both participants and some kind of stimulus (e.g., words, pictures, sounds, stories …)
@@ -206,17 +206,16 @@ The critical extension, here, is to take the perspective in which we are not jus
 <div id="resources-for-you-1" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> Resources for you</h2>
 <p>You will see – below – links to the lectures, information about the data we will analyze, and an explanation of the activities.</p>
-<p>The links and everything you need for your practical work class can <em>also</em> be found in the <strong>Week 16 files</strong> folder on Moodle, here:</p>
-<p><a href="https://modules.lancaster.ac.uk/course/view.php?id=34085#section-10" target="_blank">Link to Moodle</a></p>
-<p>Our aim is to get started in our development of understanding how to use multilevel of mixed-effects models: we need to learn what they are, when and why they are needed, and how they should be used.</p>
+<p>The links and everything you need for your practical work class can <em>also</em> be found in the <strong>Week 18 files</strong> folder on Moodle, here:</p>
+<p><a href="https://modules.lancaster.ac.uk/course/view.php?id=34085#section-12" target="_blank">Link to Moodle</a></p>
 <p>I have prepared materials that I suggest you use in this order:</p>
 <ul>
 <li><strong>Before the lab session</strong></li>
 </ul>
 <ol style="list-style-type: decimal">
 <li>Take a look at the lecture slides, watch the lecture video. The lecture is designed to work <em>only</em> as an outline summary of the materials. Learning will work best if you read the book chapter I wrote on the topic, and work through the exercises in the workbook.R</li>
-<li>Read the book chapter, at least up to p.11, to get an outline view on the answers to the what, why, when and how questions on multilevel models.</li>
-<li>Download the week 16 files, and work your way throught the workbook.R, guided by the book chapter, at least as far as reading in the data and tidying it for analysis.</li>
+<li>Read the book chapter, to develop understanding.</li>
+<li>Download the week 18 files, and work your way throught the workbook.R, guided by the book chapter, at least as far as reading in the data and tidying it for analysis.</li>
 </ol>
 <ul>
 <li><strong>In the session</strong></li>
@@ -244,6 +243,11 @@ Click on a link and your browser should open a tab showing the <em>Panopto</em> 
 <h3><span class="header-section-number">3.2.2</span> Book chapter</h3>
 <p>I wrote a book chapter to support PSYC402 student learning.</p>
 <p>You can download the chapter here <a href="files/week-18/02-mixed.pdf">02-mixed.pdf</a>.</p>
+<p>The chapter is useful to you in two ways:</p>
+<ol style="list-style-type: decimal">
+<li>I use text and visualization to explain the core ideas in depth;</li>
+<li>I take you through each part of the code that you need to use, step-by-step, for your development of practical skills in data tidying, visualization, and analysis.</li>
+</ol>
 </div>
 <div id="pre-lab-activity-1-get-your-files-ready-for-the-lab-class-1" class="section level3" number="3.2.3">
 <h3><span class="header-section-number">3.2.3</span> Pre-lab activity 1: Get your files ready for the lab class</h3>
@@ -277,35 +281,47 @@ We will split .R scripts into parts, tasks and questions:</p>
 <div id="tasks-1" class="section level3" number="3.2.5">
 <h3><span class="header-section-number">3.2.5</span> Tasks</h3>
 <p>In the activity, we are going to work through the following tasks.</p>
+<p>First, I am going to show you <strong>how to put together, tidy, and prepare</strong> for analysis the kind of data you can expect to record or receive when you do a psychological experiment.
+You can skip the tasks in this part but checking the steps out will save you a lot of time if you are going to work with primary or original (i.e. raw and thus messy) data in your dissertation or in your future professional work.</p>
 <ol style="list-style-type: decimal">
-<li>Load the libraries we need for the exercises</li>
-<li>Read in the data file we will be using: <code>BAFACALO_DATASET.RData</code></li>
-<li>We start by selecting the variables we want – using <code>select()</code></li>
-<li>Take missing values out of the brazil data – using <code>na.omit()</code></li>
-<li>Get R to treat a variable as a type object of the kind required – using the <code>as.numeric()</code> or <code>as.factor()</code> functions</li>
-<li>Experiment with variable coercion</li>
-<li>Visualize the relationship between portuguese and english grades using a scatterplot</li>
-<li>Work on editing plots</li>
-<li>Analyze the relationship between english and portuguese grades in the brazil data – using <code>lm()</code></li>
-<li>Exercise: adapt the <code>lm()</code> code to do a different analysis</li>
-<li>Plot the relationship between english and portuguese grades separately for each class using <code>facet_wrap</code></li>
-<li>Practice your <code>facet_wrap()</code> skills</li>
-<li>Run a linear mixed-effects analysis of the relationship between english and portuguese grades using <code>lmer()</code></li>
-<li>Exercise mixed-effects model coding</li>
+<li>Load the libraries we need</li>
+<li>Read in the data files we will be using – using variants of the <code>read_()</code> function</li>
+<li>Restructure behavioural (response) data – using <code>pivot_longer()</code></li>
+<li>Join data from different sources – using <code>full_join()</code></li>
+<li>Select just the variables you need – using <code>select()</code></li>
+<li>Filter observations by setting different kinds of conditions – using <code>filter()</code></li>
+<li>Remove missing values – using <code>na.omit()</code></li>
+<li>Produce an Excel-readable and shareable version of the tidied <em>prepared</em> dataset – using <code>write_csv()</code></li>
 </ol>
-<p>There are some extension exercises you can use to develop your coding skills.</p>
+<p>Second, we work on our understanding and practical skills in modeling multilevel structured data.
+This part <em>is</em> essential to your attainment of our learning objectives.</p>
+<ol start="9" style="list-style-type: decimal">
+<li>Read in the pre-prepared data – using <code>read_csv()</code> and defining <code>col_types</code> as we do so</li>
+<li>Visualizing effects with scatterplots – using <code>geom_point()</code> and <code>geom_smooth()</code></li>
+<li>Modeling effects while ignoring grouping – using <code>lm()</code></li>
+<li>Visualizing how effects may differ between groups (here, between participants) – using <code>facet_wrap()</code></li>
+<li>Fitting linear mixed-effects models – using <code>lmer()</code></li>
+<li>Learning to fit mixed-effects models with different kinds of random effects structure, examining the impact of these differences in structure</li>
+<li>Taking into account random effects associated with differences between participants, as well as differences between stimuli</li>
+</ol>
+<p>In the answers version of the workbook, I will provide optional extension exercises you can use to develop your coding skills, showing how I produced the plots in the slides and the book chapter.</p>
 </div>
-<div id="the-data-we-will-work-with-brazilian-school-children-1" class="section level3" number="3.2.6">
-<h3><span class="header-section-number">3.2.6</span> The data we will work with: Brazilian school children</h3>
-<p>We will be working with data taken from a study on education outcomes in Brazilian children, reported by Golina and Gomes (2014).
-The <code>BAFACALO_DATASET.RData</code> data were collected and shared online by Golina and Gomes (2014).
-Information about the background motivating the study, the methods of data collection, along with the dataset itself, can be found in the book chapter, and at the data journal article:</p>
-<p><a href="https://openpsychologydata.metajnl.com/articles/10.5334/jopd.af/" target="_blank">Golina and Gomes (2014) article</a></p>
+<div id="the-data-we-will-work-with-cp-reading-study" class="section level3" number="3.2.6">
+<h3><span class="header-section-number">3.2.6</span> The data we will work with: CP reading study</h3>
+<p>This week, we will be working with the <strong>CP reading study</strong> dataset.
+CP tested 62 children (aged 116-151 months) on reading aloud in English.
+In the experimental reading task, she presented 160 words as stimuli.
+The same 160 words were presented to all children.
+The words were presented one at a time on a computer screen.
+Each time a word was shown, the children had to read the word out loud and their response was recorded.
+Thus, the CP reading study dataset comprised observations about the responses made by 62 children to 160 words.</p>
+<p>Ultimately, the CP dataset were incorporated in an analysis of the impact of age on reading skills over the life-span, reported by Davies, Arnell, Birchenough, Grimmond and Houlson (2017).
+You can find more details on the data and the methods in the book chapter associated with this class, and in that paper.</p>
 </div>
 </div>
 <div id="references-1" class="section level2" number="3.3">
 <h2><span class="header-section-number">3.3</span> References</h2>
-<p>Golino, H. F., &amp; Gomes, C. M. A. (2014). Psychology data from the “BAFACALO project: The Brazilian Intelligence Battery based on two state-of-the-art models – Carroll’s Model and the CHC model”. <em>Journal of Open Psychology Data</em>, 2(1), e6. DOI: <a href="http://doi.org/10.5334/jopd.af" class="uri">http://doi.org/10.5334/jopd.af</a></p>
+<p>Davies, R. A., Arnell, R., Birchenough, J. M., Grimmond, D., &amp; Houlson, S. (2017). Reading through the life span: Individual differences in psycholinguistic effects. <em>Journal of Experimental Psychology: Learning, Memory, and Cognition</em>, 43, 1298.</p>
 
 </div>
 </div>
