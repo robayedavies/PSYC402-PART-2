@@ -28,3 +28,16 @@ targets
 book-chapter
 the-data-we-will-work-with-brazilian-school-children
 references
+psyc402-part-2-week-16-1
+welcome-1
+the-approach-we-take-1
+targets-1
+resources-for-you-1
+lectures-video-recordings-1
+book-chapter-1
+pre-lab-activity-1-get-your-files-ready-for-the-lab-class-1
+lab-activity-1
+tasks-1
+the-data-we-will-work-with-brazilian-school-children-1
+references-1
+psyc402-part-2-week-18
