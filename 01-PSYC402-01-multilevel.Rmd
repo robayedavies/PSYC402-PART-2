@@ -196,6 +196,14 @@ In the activity, we are going to work through the following tasks.
 
 There are some extension exercises you can use to develop your coding skills.
 
+### Answers
+
+You can now download the answers version of the practical activity workbook script as: [402-01-multilevel-workbook-with-answers.R](files/week-16/402-01-multilevel-workbook-with-answers.R).
+
+There is an extension section which shows you code for how I fitted a separate model of the relation between English and Portuguese grades for each class, then plotted the model estimates to demonstrate between class differences in intercepts and slopes.
+
+If you have any questions, please post them to the Moodle discussion forum, or to the Friday Q&A slido.
+
 ### The data we will work with: Brazilian school children
 
 We will be working with data taken from a study on education outcomes in Brazilian children, reported by Golina and Gomes (2014).
