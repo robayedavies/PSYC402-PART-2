@@ -46,46 +46,148 @@ Please go to the chapter for the authoritative version of the full text: [03-mix
 
 ### Introductory discussion
 
-<!-- Many psychological studies involve scenarios in which the researcher samples both participants and some kind of stimulus (e.g., words, pictures, sounds, stories ...) -->
-<!-- Often, the researcher will present the stimuli to the participants for response in some version of a range of possible designs:  -->
+We are going to respond to the multilevel (or crossed random effects) structure in the data by using linear mixed-effects models to analyze the data.
+This week, we are going to look at what mixed-effects models do from a **new perspective**.
 
-<!-- - all participants see and respond to all stimuli;  -->
-<!-- - participants respond to different sub-sets of stimuli in different conditions (or in different groups) but they see and respond to all stimuli in a sub-set;  -->
-<!-- - participants are allocated to respond to stimulus sub-sets according to a counter balancing scheme (e.g., through the use of Latin squares). -->
+Our concern will be with different ways of thinking about why mixed-effects models are superior to linear models where data have a multilevel structure.
+Mixed-effects models tend to be more accurate in this (very common) situation because of what is called *partial pooling* and *shrinkage* or *regularization*.
+We use our practical example to explore these ideas.
 
-<!-- We are talking, here, about **repeated-measures designs** where the experimenter presents a sample of multiple stimuli for response to each participant in a sample of multiple participants. -->
+Figure \@ref(fig:no-vs-complete-vs-partial) presents a grid or trellis of plots, one plot per person.
+To draw the plot, I adapted code written by TJ Mahr:
 
-<!-- Whatever version of this scenario, *if* participants are responding to multiple stimuli and *if* multiple participants respond to each stimulus, then the data will have a *multilevel structure* such that each observation can be grouped both by participant and by stimulus. -->
-<!-- We could say that observations of the responses made by participants to each stimulus can be grouped by participant: each person will tend to respond in similar ways to different stimuli; and we will see differences between participants. -->
-<!-- Or, we could say that observations of responses can be grouped by stimulus because each stimulus will tend to evoke similar kinds of responses in different people; and we will see differences between the responses made to different stimuli. -->
-<!-- The differences between the sets (or groups) of responses made by different participants (between participants differences) and the differences between the sets of responses made to different stimuli (between stimulus differences) may be unexplained or random differences. -->
+<https://www.tjmahr.com/plotting-partial-pooling-in-mixed-effects-models/>
 
-<!-- **The multilevel structure requires that we use multilevel or mixed-effects models to analyse our data.** -->
-<!-- We are going to learn about an approach in which we take into account the unexplained or random differences between participants *and* between stimuli. -->
-<!-- A substantial portion of our conceptual development will now begin, with a deepening in our perspective on the impact of random differences between participants or stimuli, which we shall discuss in terms of *random effects*. -->
-<!-- We shall extend our practical skills by learning how to specify these random effects in different ways using the `lmer()` function. -->
+In each plot, you can see points corresponding to the RT of each response made by a participant to a stimulus word.
+In all plots, the pink line represents the *complete pooling* data model estimate of the effect of frequency on response RTs.
+In each plot, the green line represents the effect of frequency estimated using just the data for each participant, the *no pooling* estimates.
+In the plots, we also see blue lines that represent the mixed-effects model *partial pooling* estimates.
 
-<!-- We will learn to fit models that can effectively handle the fact that we may observe responses from participants who not only differ in their average level of performance (differ in intercepts, if we control for the effects of covariates) but differ also in their response to experimental variables (differ in slopes). -->
-<!-- Our work, here, will build on the work we did in the previous class. -->
-<!-- Figure \@ref(fig:freqperchildlm) presents estimates of the intercept and the effect of an experimental variable (word frequency) for each participant in our example dataset, with plot points shown ordered by the size of the estimate. -->
+```{r no-vs-complete-vs-partial, warning = FALSE, message = FALSE, echo = FALSE, fig.height=8.5, fig.width=6, out.width='95%', fig.cap="Plot showing the relationship between logRT and log frequency (LgSUBTLCD) separately for each participant; pink line shows the complete pooling estimate green line shows the no-pooling estimate; and blue line shows the linear mixed-effects model partial pooling estimate"}
 
+#######################################################################################
 
+# ML.all <- read_csv("subjects.behaviour.words-310114.csv")
+ML.all.correct <-
+  filter(ML.all, RT >= 200)
+ML.all.correct$logrt <- log10(ML.all.correct$RT)
 
-<!-- We will learn to fit models that can *also* handle the fact that, as is often true in psychological research, we may observe responses that are made to stimuli which will present random differences as well (in relative difficulty, say). -->
-<!-- For example, some words elicit slower and some elicit faster responses on average (Figure \@ref(fig:pitemsints)). -->
+# -- mixed-effects models represent partial pooling of data
 
+# -- we fit a separate line for each cluster of data, one for each participant 
+# -- the lmList() function in lme4 automates this process
+df_no_pooling <- lmList(logrt ~
+                          
+                          LgSUBTLCD | subjectID, ML.all.correct) %>% 
+  coef() %>% 
+  # Subject IDs are stored as row-names. Make them an explicit column
+  rownames_to_column("subjectID") %>% 
+  rename(Intercept = `(Intercept)`, Slope_frequency = LgSUBTLCD) %>% 
+  add_column(Model = "No pooling")
 
+# -- inspect the tibble produced by these lines of code
+# summary(df_no_pooling)
 
-<!-- In a further extension of our understanding, located especially in the chapter reading, we will develop our conceptual grasp of multilevel or mixed effects models by considering carefully what we estimate when we estimate random effects. -->
-<!-- We will discuss the ways in which the random effects structure of multilevel or mixed-effects models can vary, and what impact that variation may have, as illustrated in Figure \@ref(fig:indiv-prediction). -->
+# -- make the subjectID and model label vectors a factor
+df_no_pooling$subjectID <- as.factor(df_no_pooling$subjectID)
+df_no_pooling$Model <- as.factor(df_no_pooling$Model)
 
+# -- in contrast, we might consider a complete pooling model where all the 
+# information from the participants is combined together
+# -- we fit a single line for all data
 
+# -- fit a model on all the data pooled together
+m_pooled <- lm(logrt ~ LgSUBTLCD, ML.all.correct) 
+
+# -- repeat the intercept and slope terms for each participant
+df_pooled <- data_frame(
+  Model = "Complete pooling",
+  subjectID = unique(ML.all.correct$subjectID),
+  Intercept = coef(m_pooled)[1], 
+  Slope_frequency = coef(m_pooled)[2])
+
+# -- inspect
+# summary(df_pooled)
+
+# -- make the model label vector a factor
+df_pooled$Model <- as.factor(df_pooled$Model)
+
+# -- we can compare these two approaches
+# -- instead of calculating the regression lines with stat_smooth(), we can use 
+# geom_abline() to draw the lines from our dataframe of intercept and slope 
+# parameters
+
+# -- join the raw data so we can use plot the points and the lines
+# df_models <- bind_rows(df_pooled, df_no_pooling) %>% 
+#   left_join(ML.all.correct, by = "subjectID")
+
+# -- we fit a mixed-effects model including the fixed effects of the intercept and the frequency effect
+# -- as well as the random effects due to differences between participants (subject ID) in intercepts or
+# in the slope of the frequency effect, as well as differences between items (item_name) in intercepts
+
+ML.all.correct.lmer  <- lmer(logrt ~
+                               
+                               LgSUBTLCD + (LgSUBTLCD + 1|subjectID) + (1|item_name),     
+                             
+                             data = ML.all.correct, REML = FALSE)
+# summary(ML.all.correct.lmer)
+
+# -- to visualize these estimates, we extract each participant’s intercept and slope using coef()
+
+# -- make a dataframe with the fitted effects
+df_partial_pooling <- coef(ML.all.correct.lmer)[["subjectID"]] %>% 
+  rownames_to_column("subjectID") %>% 
+  as_tibble() %>% 
+  rename(Intercept = `(Intercept)`, Slope_frequency = LgSUBTLCD) %>% 
+  add_column(Model = "Partial pooling")
+
+# -- inspect the tibble produced by these lines of code
+# summary(df_partial_pooling)
+
+# -- make the subjectID and model label vectors both factors
+df_partial_pooling$subjectID <- as.factor(df_partial_pooling$subjectID)
+df_partial_pooling$Model <- as.factor(df_partial_pooling$Model)
+
+# -- update the previous plot by using a dataset consisting of of all three models’ estimates
+
+df_models <- rbind(df_pooled, df_no_pooling, df_partial_pooling) %>%
+  left_join(ML.all.correct, by = "subjectID")
+
+# -- inspect the differences between the datasets
+# summary(df_pooled)
+# summary(df_no_pooling)
+# summary(df_partial_pooling)
+# summary(ML.all.correct)
+# summary(df_models)
+
+# -- replace the data-set used in the last plot with this new data-set
+# -- and regenerate the plot
+# -- we  produce a plot showing the no-pooling, complete-pooling and partial-pooling (mixed effects)
+# estimates
+
+# # pdf("ML-data-frequency-no-or-complete-or-partial-pooling.pdf", w = 6, h = 8)
+
+p_model_comparison <- ggplot(df_models) +
+  aes(x = LgSUBTLCD, y = logrt) +
+  # Set the color mapping in this layer so the points don't get a color
+  geom_point(alpha = .05) +
+  geom_abline(aes(intercept = Intercept,
+                  slope = Slope_frequency,
+                  color = Model),
+              size = .75) +
+  facet_wrap(~ subjectID) +
+  scale_x_continuous(breaks = 1.5:4 * 1) +
+  theme_bw() +
+  theme(legend.position = "top")
+
+p_model_comparison
+
+# # dev.off()
+```
 
 ### Critical idea
 
-<!-- The critical idea is that, in general, in experimental psychological science, when we do data analysis, *if* we want to estimate effects of experimental variables more accurately *then* our models need to incorporate terms to capture the impact on observed outcomes of variation among sampled participants and among sampled stimuli. -->
-<!-- Historically, we have, as a field, learned that we must take these sampling effects into account. -->
-<!-- More and more commonly, we are learning to use multilevel or mixed-effects models to do this. -->
+**Shrinkage or regularization** means that models of data should be excited by the data but not *too* excited.
 
 ### Targets
 

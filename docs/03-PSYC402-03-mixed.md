@@ -76,46 +76,31 @@ Please go to the chapter for the authoritative version of the full text: [03-mix
 
 ### Introductory discussion
 
-<!-- Many psychological studies involve scenarios in which the researcher samples both participants and some kind of stimulus (e.g., words, pictures, sounds, stories ...) -->
-<!-- Often, the researcher will present the stimuli to the participants for response in some version of a range of possible designs:  -->
+We are going to respond to the multilevel (or crossed random effects) structure in the data by using linear mixed-effects models to analyze the data.
+This week, we are going to look at what mixed-effects models do from a **new perspective**.
 
-<!-- - all participants see and respond to all stimuli;  -->
-<!-- - participants respond to different sub-sets of stimuli in different conditions (or in different groups) but they see and respond to all stimuli in a sub-set;  -->
-<!-- - participants are allocated to respond to stimulus sub-sets according to a counter balancing scheme (e.g., through the use of Latin squares). -->
+Our concern will be with different ways of thinking about why mixed-effects models are superior to linear models where data have a multilevel structure.
+Mixed-effects models tend to be more accurate in this (very common) situation because of what is called *partial pooling* and *shrinkage* or *regularization*.
+We use our practical example to explore these ideas.
 
-<!-- We are talking, here, about **repeated-measures designs** where the experimenter presents a sample of multiple stimuli for response to each participant in a sample of multiple participants. -->
+Figure \@ref(fig:no-vs-complete-vs-partial) presents a grid or trellis of plots, one plot per person.
+To draw the plot, I adapted code written by TJ Mahr:
 
-<!-- Whatever version of this scenario, *if* participants are responding to multiple stimuli and *if* multiple participants respond to each stimulus, then the data will have a *multilevel structure* such that each observation can be grouped both by participant and by stimulus. -->
-<!-- We could say that observations of the responses made by participants to each stimulus can be grouped by participant: each person will tend to respond in similar ways to different stimuli; and we will see differences between participants. -->
-<!-- Or, we could say that observations of responses can be grouped by stimulus because each stimulus will tend to evoke similar kinds of responses in different people; and we will see differences between the responses made to different stimuli. -->
-<!-- The differences between the sets (or groups) of responses made by different participants (between participants differences) and the differences between the sets of responses made to different stimuli (between stimulus differences) may be unexplained or random differences. -->
+<https://www.tjmahr.com/plotting-partial-pooling-in-mixed-effects-models/>
 
-<!-- **The multilevel structure requires that we use multilevel or mixed-effects models to analyse our data.** -->
-<!-- We are going to learn about an approach in which we take into account the unexplained or random differences between participants *and* between stimuli. -->
-<!-- A substantial portion of our conceptual development will now begin, with a deepening in our perspective on the impact of random differences between participants or stimuli, which we shall discuss in terms of *random effects*. -->
-<!-- We shall extend our practical skills by learning how to specify these random effects in different ways using the `lmer()` function. -->
+In each plot, you can see points corresponding to the RT of each response made by a participant to a stimulus word.
+In all plots, the pink line represents the *complete pooling* data model estimate of the effect of frequency on response RTs.
+In each plot, the green line represents the effect of frequency estimated using just the data for each participant, the *no pooling* estimates.
+In the plots, we also see blue lines that represent the mixed-effects model *partial pooling* estimates.
 
-<!-- We will learn to fit models that can effectively handle the fact that we may observe responses from participants who not only differ in their average level of performance (differ in intercepts, if we control for the effects of covariates) but differ also in their response to experimental variables (differ in slopes). -->
-<!-- Our work, here, will build on the work we did in the previous class. -->
-<!-- Figure \@ref(fig:freqperchildlm) presents estimates of the intercept and the effect of an experimental variable (word frequency) for each participant in our example dataset, with plot points shown ordered by the size of the estimate. -->
-
-
-
-<!-- We will learn to fit models that can *also* handle the fact that, as is often true in psychological research, we may observe responses that are made to stimuli which will present random differences as well (in relative difficulty, say). -->
-<!-- For example, some words elicit slower and some elicit faster responses on average (Figure \@ref(fig:pitemsints)). -->
-
-
-
-<!-- In a further extension of our understanding, located especially in the chapter reading, we will develop our conceptual grasp of multilevel or mixed effects models by considering carefully what we estimate when we estimate random effects. -->
-<!-- We will discuss the ways in which the random effects structure of multilevel or mixed-effects models can vary, and what impact that variation may have, as illustrated in Figure \@ref(fig:indiv-prediction). -->
-
-
+<div class="figure">
+<img src="03-PSYC402-03-mixed_files/figure-html/no-vs-complete-vs-partial-1.png" alt="Plot showing the relationship between logRT and log frequency (LgSUBTLCD) separately for each participant; pink line shows the complete pooling estimate green line shows the no-pooling estimate; and blue line shows the linear mixed-effects model partial pooling estimate" width="95%" />
+<p class="caption">(\#fig:no-vs-complete-vs-partial)Plot showing the relationship between logRT and log frequency (LgSUBTLCD) separately for each participant; pink line shows the complete pooling estimate green line shows the no-pooling estimate; and blue line shows the linear mixed-effects model partial pooling estimate</p>
+</div>
 
 ### Critical idea
 
-<!-- The critical idea is that, in general, in experimental psychological science, when we do data analysis, *if* we want to estimate effects of experimental variables more accurately *then* our models need to incorporate terms to capture the impact on observed outcomes of variation among sampled participants and among sampled stimuli. -->
-<!-- Historically, we have, as a field, learned that we must take these sampling effects into account. -->
-<!-- More and more commonly, we are learning to use multilevel or mixed-effects models to do this. -->
+**Shrinkage or regularization** means that models of data should be excited by the data but not *too* excited.
 
 ### Targets
 
