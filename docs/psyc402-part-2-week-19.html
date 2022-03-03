@@ -340,10 +340,62 @@ This part <em>is</em> essential to your attainment of our learning objectives.</
 </div>
 <div id="the-data-we-will-work-with-ml" class="section level3" number="4.2.6">
 <h3><span class="header-section-number">4.2.6</span> The data we will work with: ML</h3>
+<p>We will be working with the <strong>ML word recognition study</strong> dataset.
+The focus of our interest is on the ways in which participant attributes (like age) or word properties (like frequency) influence the speed of response in a task measuring the ability to recognize visually presented English words.</p>
+<p>ML examined visual word recognition in younger and older adults using the lexical decision task.
+Lexical decision is a very popular technique for examining word recognition, especially in adults.
+While not every Psychology student will be interested in word recognition, or reading, everyone should understand that tasks like lexical decision are similar to a range of other tasks used in experimental psychological science.
+The critical features of the study are that we have an outcome – a decision response – observed multiple times (for each stimulus) for each participant.
+We shall be analyzing the speed of response, reaction time (RT), measured in milliseconds (ms).</p>
+<p>In the lexical decision task, participants completed a series of 320 trials.
+In each trial, they were presented with a stimulus, a string of letters, that was either a real word (e.g., ‘car’) or a made-up or non-word (e.g., ‘cas’).
+There were 160 word and 160 non-word stimuli.
+Each stimulus was presented one at a time on a computer screen.
+Participants were required to respond to the stimulus by pressing a button to indicate either that they thought the stimulus was a word (they knew) or that they thought it was a non-word.
+Each sequence of events, in which a stimulus was presented and a response was recorded, is known as a <em>trial</em>.
+The critical outcome measure was the reaction time of each response: the interval of time from the moment the stimulus was first presented (the stimulus onset) to the moment the response was made (the response onset).</p>
+<p>The total number of participants for this study was 39, including a group of younger adults and a group of older adults.
+Information was collected about the participants’ age, education and gender.
+In addition, participants were asked to complete ability measures (TOWRE sight word and phonemic tests, Torgesen et al., 1999) and a measure of reading experience (Author Recognition Test, ART, Masterson &amp; Hayes, 2007).</p>
+<p>In summary, ML collected data on: lexical decision task response reaction times (RTs) and accuracy; information on lexical decision stimulus items, including variables like the length or frequency of words (values taken from the English Lexicon Project, Balota et al., 2007); and information on participants, including age, reading ability and reading experience.</p>
+<p>The ML study data includes the following variables that we will work with (as well as some you can ignore).
+More information about the study, and the research context for the study, including the research questions, can be found in the book chapter.</p>
+<p><em>Identifying variables</em></p>
+<ul>
+<li><code>subjectID</code> – identifying code for participants</li>
+<li><code>item_name</code> – words presented as stimuli</li>
+<li><code>item_number</code> – identifying code for words presented</li>
+</ul>
+<p><em>Response variables</em></p>
+<ul>
+<li><code>RT</code> – response reaction time (ms), for responses to words</li>
+</ul>
+<p><em>Subject variables</em></p>
+<ul>
+<li><code>Age</code> – in years</li>
+<li><code>Gender</code> – coded M (male), F (female)</li>
+<li><code>TOWRE_wordacc</code> – word reading skill, words read correctly (out of 104)</li>
+<li><code>TOWRE_nonwordacc</code> – nonword reading skill, nonwords (made up words) read correctly (out of 63)</li>
+<li><code>ART_HRminusFR</code> – reading experience score</li>
+</ul>
+<p><em>Item variables</em></p>
+<ul>
+<li><p><code>Length</code> – word length, in letters</p></li>
+<li><p><code>Ortho_N</code> – orthographic neighbourhood size, how many other words in English a stimulus word looks like</p></li>
+<li><p><code>OLD</code> – orthographic Levenshtein distance, how many letter edits (addition, deletion or substitution) it would take to make a stimulus word look like another English word (a measure of orthographic neighbourhood) (Yarkoni et al., 2008)</p></li>
+<li><p><code>BG_Sum, BG_Mean, BG_Freq_By_Pos</code> – measures of how common are pairs of letters that compose stimulus words</p></li>
+<li><p><code>SUBTLWF, LgSUBTLWF,  SUBTLCD, LgSUBTLCD</code> – measures of how common stimulus words are, taken from the SUBTLEX corpus analysis of word frequency (Brysbaert and New, 2009)</p></li>
+</ul>
 </div>
 </div>
 <div id="references-2" class="section level2" number="4.3">
 <h2><span class="header-section-number">4.3</span> References</h2>
+<p>Baayen, R. H., Davidson, D. J., &amp; Bates, D. M. (2008). Mixed-effects modeling with crossed random effects for subjects and items. <em>Journal of Memory and Language</em>, 59, 390-412.</p>
+<p>Balota, D. A., Yap, M. J., Hutchison, K. A., Cortese, M. J., Kessler, B., Loftis, B., . . . Treiman, R. (2007). The English lexicon project. <em>Behavior Research Methods</em>, 39, 445– 459. <a href="http://dx.doi.org/10.3758/BF03193014" class="uri">http://dx.doi.org/10.3758/BF03193014</a></p>
+<p>Brysbaert, M., &amp; New, B. (2009). Moving beyond Kucˇera and Francis: A critical evaluation of current word frequency norms and the introduction of a new and improved word frequency measure for American English. <em>Behavior Research Methods</em>, 41, 977–990. <a href="http://dx.doi.org/10.3758/" class="uri">http://dx.doi.org/10.3758/</a> BRM.41.4.977</p>
+<p>Masterson, J., &amp; Hayes, M. (2007). Development and data for UK versions of an author and title recognition test for adults. <em>Journal of Research in Reading</em>, 30, 212–219. <a href="http://dx.doi.org/10.1111/j.1467-9817.2006" class="uri">http://dx.doi.org/10.1111/j.1467-9817.2006</a> .00320.x</p>
+<p>Torgesen, J. K., Wagner, R. K., &amp; Rashotte, C. A. (1999). <em>TOWRE Test of word reading efficiency</em>. Austin, TX: Pro-ed.</p>
+<p>Yarkoni, T., Balota, D., &amp; Yap, M. (2008). Moving beyond Coltheart’s N: A new measure of orthographic similarity. <em>Psychonomic Bulletin &amp; Review</em>, 15, 971–979. <a href="http://dx.doi.org/10.3758/PBR.15.5.971" class="uri">http://dx.doi.org/10.3758/PBR.15.5.971</a></p>
 
 </div>
 </div>

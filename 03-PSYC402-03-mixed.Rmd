@@ -236,6 +236,69 @@ In the answers version of the workbook, I will provide optional extension exerci
 
 ### The data we will work with: ML
 
+We will be working with the **ML word recognition study** dataset.
+The focus of our interest is on the ways in which participant attributes (like age) or word properties (like frequency) influence the speed of response in a task measuring the ability to recognize visually presented English words.
+
+ML examined visual word recognition in younger and older adults using the lexical decision task.
+Lexical decision is a very popular technique for examining word recognition, especially in adults. 
+While not every Psychology student will be interested in word recognition, or reading, everyone should understand that tasks like lexical decision are similar to a range of other tasks used in experimental psychological science.
+The critical features of the study are that we have an outcome -- a decision response -- observed multiple times (for each stimulus) for each participant. 
+We shall be analyzing the speed of response, reaction time (RT), measured in milliseconds (ms).
+
+In the lexical decision task, participants completed a series of 320 trials.
+In each trial, they were presented with a stimulus, a string of letters, that was either a real word (e.g., 'car') or a made-up or non-word (e.g., 'cas').
+There were 160 word and 160 non-word stimuli.
+Each stimulus was presented one at a time on a computer screen.
+Participants were required to respond to the stimulus by pressing a button to indicate either that they thought the stimulus was a word (they knew) or that they thought it was a non-word.
+Each sequence of events, in which a stimulus was presented and a response was recorded, is known as a *trial*.
+The critical outcome measure was the reaction time of each response: the interval of time from the moment the stimulus was first presented (the stimulus onset) to the moment the response was made (the response onset).
+
+The total number of participants for this study was 39, including a group of younger adults and a group of older adults.
+Information was collected about the participants' age, education and gender.
+In addition, participants were asked to complete ability measures (TOWRE sight word and phonemic tests, Torgesen et al., 1999) and a measure of reading experience (Author Recognition Test, ART, Masterson \& Hayes, 2007).
+
+In summary, ML collected data on: lexical decision task response reaction times (RTs) and accuracy; information on lexical decision stimulus items, including variables like the length or frequency of words (values taken from the English Lexicon Project, Balota et al., 2007); and information on participants, including age, reading ability and reading experience.
+
+The ML study data includes the following variables that we will work with (as well as some you can ignore).
+More information about the study, and the research context for the study, including the research questions, can be found in the book chapter.
+
+*Identifying variables*
+
+* `subjectID` -- identifying code for participants
+* `item_name` -- words presented as stimuli
+* `item_number` -- identifying code for words presented
+
+*Response variables*
+
+* `RT` -- response reaction time (ms), for responses to words
+
+*Subject variables*
+
+* `Age` -- in years
+* `Gender` -- coded M (male), F (female)
+* `TOWRE_wordacc` -- word reading skill, words read correctly (out of 104)
+* `TOWRE_nonwordacc` -- nonword reading skill, nonwords (made up words) read correctly (out of 63)
+* `ART_HRminusFR` -- reading experience score
+
+*Item variables*
+
+* `Length` -- word length, in letters
+* `Ortho_N` -- orthographic neighbourhood size, how many other words in English a stimulus word looks like
+* `OLD` -- orthographic Levenshtein distance, how many letter edits (addition, deletion or substitution) it would take to make a stimulus word look like another English word (a measure of orthographic neighbourhood) (Yarkoni et al., 2008)
+
+* `BG_Sum, BG_Mean, BG_Freq_By_Pos` -- measures of how common are pairs of letters that compose stimulus words
+* `SUBTLWF, LgSUBTLWF,	SUBTLCD, LgSUBTLCD` -- measures of how common stimulus words are, taken from the SUBTLEX corpus analysis of word frequency (Brysbaert and New, 2009)
 
 ## References
 
+Baayen, R. H., Davidson, D. J., \& Bates, D. M. (2008). Mixed-effects modeling with crossed random effects for subjects and items. *Journal of Memory and Language*, 59, 390-412.
+
+Balota, D. A., Yap, M. J., Hutchison, K. A., Cortese, M. J., Kessler, B., Loftis, B., . . . Treiman, R. (2007). The English lexicon project. *Behavior Research Methods*, 39, 445– 459. http://dx.doi.org/10.3758/BF03193014
+
+Brysbaert, M., \& New, B. (2009). Moving beyond Kucˇera and Francis: A critical evaluation of current word frequency norms and the introduction of a new and improved word frequency measure for American English. *Behavior Research Methods*, 41, 977–990. http://dx.doi.org/10.3758/ BRM.41.4.977
+
+Masterson, J., \& Hayes, M. (2007). Development and data for UK versions of an author and title recognition test for adults. *Journal of Research in Reading*, 30, 212–219. http://dx.doi.org/10.1111/j.1467-9817.2006 .00320.x
+
+Torgesen, J. K., Wagner, R. K., \& Rashotte, C. A. (1999). *TOWRE Test of word reading efficiency*. Austin, TX: Pro-ed.
+
+Yarkoni, T., Balota, D., \& Yap, M. (2008). Moving beyond Coltheart’s N: A new measure of orthographic similarity. *Psychonomic Bulletin & Review*, 15, 971–979. http://dx.doi.org/10.3758/PBR.15.5.971
