@@ -57,66 +57,112 @@ output:
 
 Welcome to our overview of the materials and guidance you will work with in **PSYC402 Week 19** for the **03-mixed** class.
 
-This week, we again look at data with multilevel structure.
-But we now look at data where participants were asked to respond to a set of stimuli (words) so that our observations consist of recordings of the response made by each participant to each stimulus.
-We use the same analysis procedure that we used for multilevel data: with one significant change which we shall identify and explain.
+As we saw in the **Introduction to mixed-effects models** (for the `02-mixed` class), many Psychologists conduct studies where it is not sensible to think of observations as being nested (Baayen, Davidson, \& Bates, 2008). 
+We shall work with the **ML word recognition study** dataset, which has a structure similar to the CP study data that we worked with previously.
+Again, the core concern is that the data come from a study with a **repeated-measures design** where the experimenter presented multiple stimuli for response to each participant, for several participants, so that we have multiple observations for each participant and multiple observations for each stimulus.
+Getting practice with this kind of data will help you to easily recognize what you have got when you see it in your own work.
+
+We shall analyse the outcome variable in relation to:
+
+\begin{description}
+\item[fixed effects]
+the impact of independent variables like participant reading skill or word frequency
+\item[random effects]
+the impact of random or unexplained differences between participants and also between stimuli
+\end{description}
 
 In this webpage, I extract and present an outline taster summary (a little re-ordered) of a second chapter written for the course.
 Please go to the chapter for the authoritative version of the full text: [03-mixed.pdf](files/week-19/03-mixed.pdf).
 
 ### Introductory discussion
 
-Many psychological studies involve scenarios in which the researcher samples both participants and some kind of stimulus (e.g., words, pictures, sounds, stories ...)
-Often, the researcher will present the stimuli to the participants for response in some version of a range of possible designs: 
+<!-- Many psychological studies involve scenarios in which the researcher samples both participants and some kind of stimulus (e.g., words, pictures, sounds, stories ...) -->
+<!-- Often, the researcher will present the stimuli to the participants for response in some version of a range of possible designs:  -->
 
-- all participants see and respond to all stimuli; 
-- participants respond to different sub-sets of stimuli in different conditions (or in different groups) but they see and respond to all stimuli in a sub-set; 
-- participants are allocated to respond to stimulus sub-sets according to a counter balancing scheme (e.g., through the use of Latin squares).
+<!-- - all participants see and respond to all stimuli;  -->
+<!-- - participants respond to different sub-sets of stimuli in different conditions (or in different groups) but they see and respond to all stimuli in a sub-set;  -->
+<!-- - participants are allocated to respond to stimulus sub-sets according to a counter balancing scheme (e.g., through the use of Latin squares). -->
 
-We are talking, here, about **repeated-measures designs** where the experimenter presents a sample of multiple stimuli for response to each participant in a sample of multiple participants.
+<!-- We are talking, here, about **repeated-measures designs** where the experimenter presents a sample of multiple stimuli for response to each participant in a sample of multiple participants. -->
 
-Whatever version of this scenario, *if* participants are responding to multiple stimuli and *if* multiple participants respond to each stimulus, then the data will have a *multilevel structure* such that each observation can be grouped both by participant and by stimulus.
-We could say that observations of the responses made by participants to each stimulus can be grouped by participant: each person will tend to respond in similar ways to different stimuli; and we will see differences between participants.
-Or, we could say that observations of responses can be grouped by stimulus because each stimulus will tend to evoke similar kinds of responses in different people; and we will see differences between the responses made to different stimuli.
-The differences between the sets (or groups) of responses made by different participants (between participants differences) and the differences between the sets of responses made to different stimuli (between stimulus differences) may be unexplained or random differences.
+<!-- Whatever version of this scenario, *if* participants are responding to multiple stimuli and *if* multiple participants respond to each stimulus, then the data will have a *multilevel structure* such that each observation can be grouped both by participant and by stimulus. -->
+<!-- We could say that observations of the responses made by participants to each stimulus can be grouped by participant: each person will tend to respond in similar ways to different stimuli; and we will see differences between participants. -->
+<!-- Or, we could say that observations of responses can be grouped by stimulus because each stimulus will tend to evoke similar kinds of responses in different people; and we will see differences between the responses made to different stimuli. -->
+<!-- The differences between the sets (or groups) of responses made by different participants (between participants differences) and the differences between the sets of responses made to different stimuli (between stimulus differences) may be unexplained or random differences. -->
 
-**The multilevel structure requires that we use multilevel or mixed-effects models to analyse our data.**
-We are going to learn about an approach in which we take into account the unexplained or random differences between participants *and* between stimuli.
-A substantial portion of our conceptual development will now begin, with a deepening in our perspective on the impact of random differences between participants or stimuli, which we shall discuss in terms of *random effects*.
-We shall extend our practical skills by learning how to specify these random effects in different ways using the `lmer()` function.
+<!-- **The multilevel structure requires that we use multilevel or mixed-effects models to analyse our data.** -->
+<!-- We are going to learn about an approach in which we take into account the unexplained or random differences between participants *and* between stimuli. -->
+<!-- A substantial portion of our conceptual development will now begin, with a deepening in our perspective on the impact of random differences between participants or stimuli, which we shall discuss in terms of *random effects*. -->
+<!-- We shall extend our practical skills by learning how to specify these random effects in different ways using the `lmer()` function. -->
 
-We will learn to fit models that can effectively handle the fact that we may observe responses from participants who not only differ in their average level of performance (differ in intercepts, if we control for the effects of covariates) but differ also in their response to experimental variables (differ in slopes).
-Our work, here, will build on the work we did in the previous class.
-Figure \@ref(fig:freqperchildlm) presents estimates of the intercept and the effect of an experimental variable (word frequency) for each participant in our example dataset, with plot points shown ordered by the size of the estimate.
-
-
-
-We will learn to fit models that can *also* handle the fact that, as is often true in psychological research, we may observe responses that are made to stimuli which will present random differences as well (in relative difficulty, say).
-For example, some words elicit slower and some elicit faster responses on average (Figure \@ref(fig:pitemsints)).
+<!-- We will learn to fit models that can effectively handle the fact that we may observe responses from participants who not only differ in their average level of performance (differ in intercepts, if we control for the effects of covariates) but differ also in their response to experimental variables (differ in slopes). -->
+<!-- Our work, here, will build on the work we did in the previous class. -->
+<!-- Figure \@ref(fig:freqperchildlm) presents estimates of the intercept and the effect of an experimental variable (word frequency) for each participant in our example dataset, with plot points shown ordered by the size of the estimate. -->
 
 
 
-In a further extension of our understanding, located especially in the chapter reading, we will develop our conceptual grasp of multilevel or mixed effects models by considering carefully what we estimate when we estimate random effects.
-We will discuss the ways in which the random effects structure of multilevel or mixed-effects models can vary, and what impact that variation may have, as illustrated in Figure \@ref(fig:indiv-prediction).
+<!-- We will learn to fit models that can *also* handle the fact that, as is often true in psychological research, we may observe responses that are made to stimuli which will present random differences as well (in relative difficulty, say). -->
+<!-- For example, some words elicit slower and some elicit faster responses on average (Figure \@ref(fig:pitemsints)). -->
+
+
+
+<!-- In a further extension of our understanding, located especially in the chapter reading, we will develop our conceptual grasp of multilevel or mixed effects models by considering carefully what we estimate when we estimate random effects. -->
+<!-- We will discuss the ways in which the random effects structure of multilevel or mixed-effects models can vary, and what impact that variation may have, as illustrated in Figure \@ref(fig:indiv-prediction). -->
 
 
 
 ### Critical idea
 
-The critical idea is that, in general, in experimental psychological science, when we do data analysis, *if* we want to estimate effects of experimental variables more accurately *then* our models need to incorporate terms to capture the impact on observed outcomes of variation among sampled participants and among sampled stimuli.
-Historically, we have, as a field, learned that we must take these sampling effects into account.
-More and more commonly, we are learning to use multilevel or mixed-effects models to do this.
+<!-- The critical idea is that, in general, in experimental psychological science, when we do data analysis, *if* we want to estimate effects of experimental variables more accurately *then* our models need to incorporate terms to capture the impact on observed outcomes of variation among sampled participants and among sampled stimuli. -->
+<!-- Historically, we have, as a field, learned that we must take these sampling effects into account. -->
+<!-- More and more commonly, we are learning to use multilevel or mixed-effects models to do this. -->
 
 ### Targets
 
-Our learning objectives include the development of key concepts and skills.
+We are probably now at a stage, in the development of our skills and understanding, where we can be more specific about our targets for learning.
+We have three components of the capacity we seek to develop.
+These components include the capacity to understand mixed-effects models, the capacity to work with them practically in R, and the capacity to present the results.
 
-- **concepts** --	begin to develop an understanding of crossed random effects of subjects and stimuli
-- **skills** -- practice how to tidy experimental data for mixed-effects analysis
-- **skills** -- practice fitting linear mixed-effects models incorporating random effects of subjects and stimuli
+The development of skills and understanding in relation to each component will travel at different speeds, for different people, and, within any person, at different speeds for different components.
+We have *already* begun to develop some of the capacities I outline.
+We will strengthen our understanding and our practical skills in the class for which this webpage, and the associated resources, are provided.
+And we will will continue to develop both understanding and skills in the next class.
 
-Our aim is to build on our development of understanding and skills.
-The critical extension, here, is to take the perspective in which we are not just grouping observations under only one kind of grouping (e.g., children's scores, grouped by class) but are working with analyses which allow us to take into account the fact that we have data -- as happens for many studies -- where observations are structured both by participants and by stimuli.
+Remember, my advice has been that we should seek to progress in our development step-by-step.
+Remember, **we need to be patient with ourselves**.
+Our understanding or the extent of our practical capacities will not necessarily match our own internal evaluation.
+In other words, we might not be satisfied with our understanding but, still, our understanding might be satisfactory.
+I want to remind you that these are challenging materials.
+For these reasons, I specify what we are aiming to develop in terms of what we can *do*.
+
+#### We want to develop the capacity to **understand** mixed-effects models
+
+This involves the capacity to:
+
+1. recognize where data have a multilevel structure;
+2. recognize where multilevel or mixed-effects models are required;
+3. distinguish the elements of a mixed-effects model, including fixed effects and random effects;
+4. be able to explain how random effects can be understood in terms of random differences (or deviations), between groups or classes or individuals, in intercepts or slopes;
+5. be able to explain how random effects can be understood in terms of variances, as a means to account for random differences between groups or classes or individuals in intercepts or slopes;
+6. be able to explain how mixed-effects models work better than linear models, for multilevel structured data, because they take into account variances associated with random differences;
+7.and be able to explain how mixed-effects models work better because they allow partial-pooling of estimates, using both information from the whole data set and information from group or class or individual specific data.
+
+#### We want to develop the capacity to work practically in R with mixed-effects models
+
+This involves the capacity to:
+
+1. be able to specify a mixed-effects model in `lmer()` code;
+2. be able to identify how the mixed-effects model code varies, depending on the kinds of random effects that are assumed;
+3. be able to identify the elements of the output or results that come from an `lmer()` mixed-effects analysis;
+4. be able to interpret the fixed-effects estimates;
+5. and be able to interpret the random effects estimates, both variance and covariance estimates.
+
+#### We want to develop the capacity to talk about and present the results of mixed-effects models
+
+This involves the capacity to:
+
+1. be able to describe in words and summary tables the results of a mixed-effects model;
+2. be able to visualize the effects estimates from a mixed-effects model.
 
 ## Resources for you
 
