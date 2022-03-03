@@ -64,3 +64,4 @@ references-2
 we-want-to-develop-the-capacity-to-understand-mixed-effects-models
 we-want-to-develop-the-capacity-to-work-practically-in-r-with-mixed-effects-models
 we-want-to-develop-the-capacity-to-talk-about-and-present-the-results-of-mixed-effects-models
+fig:density-per-child

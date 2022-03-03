@@ -148,7 +148,7 @@ I have prepared materials that I suggest you use in this order:
 
 1. Take a look at the lecture slides, watch the lecture video. The lecture is designed to work *only* as an outline summary of the materials. Learning will work best if you read the book chapter I wrote on the topic, and work through the exercises in the workbook.R
 2. Read the book chapter, to develop understanding.
-2. Download the week 18 files, and work your way throught the workbook.R, guided by the book chapter, at least as far as reading in the data and tidying it for analysis.
+2. Download the week 19 files, and work your way throught the workbook.R, guided by the book chapter.
 
 - **In the session**
 
@@ -183,7 +183,6 @@ The chapter is useful to you in two ways:
 1. I use text and visualization to explain the core ideas in depth;
 2. I take you through each part of the code that you need to use, step-by-step, for your development of practical skills in data tidying, visualization, and analysis.
 
-
 ### Pre-lab activity 1: Get your files ready for the lab class
 
 Activities in the class that goes with this chapter are associated with the following data file:
@@ -199,40 +198,73 @@ You will use `402-03-mixed-effects-workbook.R` in the lab activity.
 ### Lab activity
 
 We will take things step-by-step.
-We will split .R scripts into parts, tasks and questions:  
 
-- different parts for different phases of the analysis workflow;
-- different tasks for different steps in each phase;
-- different questions to examine different ideas or coding steps.
+The workbook has three sets of steps:
+
+- First, I show you how to prepare data for analysis -- just run the code and do the exercises;
+- Second, I walk through a sequence of tasks where I show you how to fit and compare a series of models -- again, just run the code and do the exercises;
+- the critical step is Step 7, where I ask you to follow the examples, running your own series of models but with your selection of variables;
+- Third, finally, I show you how to reproduce some of the key plots from the book chapter and slides, this is for your information, if you are interested, and is optional.
 
 ### Tasks
 
 In the activity, we are going to work through the following tasks.
 
-First, I am going to show you **how to put together, tidy, and prepare** for analysis the kind of data you can expect to record or receive when you do a psychological experiment.
-You can skip the tasks in this part but checking the steps out will save you a lot of time if you are going to work with primary or original (i.e. raw and thus messy) data in your dissertation or in your future professional work.
+First, I am going to show you **how to prepare data** for analysis.
 
-1. Load the libraries we need
-2. Read in the data files we will be using -- using variants of the `read_()` function
-3. Restructure behavioural (response) data -- using `pivot_longer()`
-4. Join data from different sources -- using `full_join()`
-5. Select just the variables you need -- using `select()`
-6. Filter observations by setting different kinds of conditions -- using `filter()`
-7. Remove missing values -- using `na.omit()`
-8. Produce an Excel-readable and shareable version of the tidied *prepared* dataset -- using `write_csv()`
+1. Load the libraries we need.
+2. Read in the data file -- using the `read_csv()` function.
+3. Plot the distribution of reaction time (RT) observations -- using `geom_density()` and `geom_rug()`.
+4. Take a look at `ggplot()` refernece information and experiment with alternative visualizations.
+5. Filter observations by setting conditions on RT -- using `filter()`.
+6. Check the impact of filtering by counting the number of observations -- using `length()`
+7. Visualize the distribution of the filtered data.
+8. Experiment to examine the impact of setting different thresholds to filter observations
+9. Transform RT -- using `log10()`. 
+10. Visualize the distribution of log10 transformed filtered RTs.
+11. Visualize the distribution of log10 RTs for each individual -- using `facet_wrap`
+`write_csv()`, as seen in Figure \@ref(fig:density-per-child).
+12. Experiment with altering the visualization.
+13. Examine what the distributon of RTs looks like for each stimulus item.
 
-Second, we work on our understanding and practical skills in modeling multilevel structured data.
-This part *is* essential to your attainment of our learning objectives.
+```{r density-per-child, echo=FALSE, fig.cap = 'Distribution of log10 RTs, for each participant in the ML dataset, with participant data shown using density plots, ordered by average logRT per person; the red line indicates the overall mean log RT', warning=FALSE, message=FALSE, out.width='100%', fig.width=9, fig.height=9}
 
-9. Read in the pre-prepared data -- using `read_csv()` and defining `col_types` as we do so
-10. Visualizing effects with scatterplots -- using `geom_point()` and `geom_smooth()`
-11. Modeling effects while ignoring grouping -- using `lm()`
-12. Visualizing how effects may differ between groups (here, between participants) -- using `facet_wrap()`
-13. Fitting linear mixed-effects models -- using `lmer()`
-14. Learning to fit mixed-effects models with different kinds of random effects structure, examining the impact of these differences in structure
-15. Taking into account random effects associated with differences between participants, as well as differences between stimuli
+ML.all.correct <- filter(ML.all, RT >= 200)
 
-In the answers version of the workbook, I will provide optional extension exercises you can use to develop your coding skills, showing how I produced the plots in the slides and the book chapter.
+ML.all.correct$logrt <- log10(ML.all.correct$RT)
+
+ML.all.correct %>%
+  mutate(mean_logrt = mean(logrt, na.rm = TRUE)) %>%
+  ungroup() %>%
+  mutate(subjectID = fct_reorder(subjectID, mean_logrt)) %>%
+  ggplot(aes(x = logrt)) +
+  geom_density(size = 1.25) +
+  facet_wrap(~ subjectID) +
+  geom_vline(xintercept = 2.778807, colour = "red", linetype = 2) +
+  scale_x_continuous(breaks = c(2.5,3)) +
+  ggtitle("Plot showing distribution of logRT for each participant; red line shows mean log10 RT") +
+  theme_bw()
+ 
+```
+
+Second, I then walk through a sequence of tasks where I show you how to fit and compare a series of models.
+
+14. Consider a linear model of the effect of word frequency on RT, then examine the impact of other potential predictors.
+15. Fit a linear mixed-effects model to estimate the effect of frequency on log RT while taking into account random effects -- using `lmer()`.
+16. Fit a linear mixed-effects models with varying random effects.
+17. Compare the different models -- using `anova()`.
+18.-19. Examine whether random slopes effects are required.
+20. Get p-values for fixed effects estimates -- using `lmerTest`.
+
+I think the important bit for your development is located in `Step 7: run your own sequence of lmer models`
+
+**Try to run a series of models in which the fixed effects variable is something different i.e. use a different word property, or properties.**
+
+Third, the last section of the workbook shows you how to reproduce the plots in the chapter and slides.
+This is optional, and provided for your interest, only.
+
+To produce the plots, I adapted Tristan Mahr's code, from his very useful blogpost (borrowed, with thanks):
+<https://www.tjmahr.com/plotting-partial-pooling-in-mixed-effects-models/>
 
 ### The data we will work with: ML
 

@@ -254,7 +254,7 @@ For these reasons, I specify what we are aiming to develop in terms of what we c
 <ol style="list-style-type: decimal">
 <li>Take a look at the lecture slides, watch the lecture video. The lecture is designed to work <em>only</em> as an outline summary of the materials. Learning will work best if you read the book chapter I wrote on the topic, and work through the exercises in the workbook.R</li>
 <li>Read the book chapter, to develop understanding.</li>
-<li>Download the week 18 files, and work your way throught the workbook.R, guided by the book chapter, at least as far as reading in the data and tidying it for analysis.</li>
+<li>Download the week 19 files, and work your way throught the workbook.R, guided by the book chapter.</li>
 </ol>
 <ul>
 <li><strong>In the session</strong></li>
@@ -302,41 +302,56 @@ Click on a link and your browser should open a tab showing the <em>Panopto</em> 
 </div>
 <div id="lab-activity-2" class="section level3" number="4.2.4">
 <h3><span class="header-section-number">4.2.4</span> Lab activity</h3>
-<p>We will take things step-by-step.
-We will split .R scripts into parts, tasks and questions:</p>
+<p>We will take things step-by-step.</p>
+<p>The workbook has three sets of steps:</p>
 <ul>
-<li>different parts for different phases of the analysis workflow;</li>
-<li>different tasks for different steps in each phase;</li>
-<li>different questions to examine different ideas or coding steps.</li>
+<li>First, I show you how to prepare data for analysis – just run the code and do the exercises;</li>
+<li>Second, I walk through a sequence of tasks where I show you how to fit and compare a series of models – again, just run the code and do the exercises;</li>
+<li>the critical step is Step 7, where I ask you to follow the examples, running your own series of models but with your selection of variables;</li>
+<li>Third, finally, I show you how to reproduce some of the key plots from the book chapter and slides, this is for your information, if you are interested, and is optional.</li>
 </ul>
 </div>
 <div id="tasks-2" class="section level3" number="4.2.5">
 <h3><span class="header-section-number">4.2.5</span> Tasks</h3>
 <p>In the activity, we are going to work through the following tasks.</p>
-<p>First, I am going to show you <strong>how to put together, tidy, and prepare</strong> for analysis the kind of data you can expect to record or receive when you do a psychological experiment.
-You can skip the tasks in this part but checking the steps out will save you a lot of time if you are going to work with primary or original (i.e. raw and thus messy) data in your dissertation or in your future professional work.</p>
+<p>First, I am going to show you <strong>how to prepare data</strong> for analysis.</p>
 <ol style="list-style-type: decimal">
-<li>Load the libraries we need</li>
-<li>Read in the data files we will be using – using variants of the <code>read_()</code> function</li>
-<li>Restructure behavioural (response) data – using <code>pivot_longer()</code></li>
-<li>Join data from different sources – using <code>full_join()</code></li>
-<li>Select just the variables you need – using <code>select()</code></li>
-<li>Filter observations by setting different kinds of conditions – using <code>filter()</code></li>
-<li>Remove missing values – using <code>na.omit()</code></li>
-<li>Produce an Excel-readable and shareable version of the tidied <em>prepared</em> dataset – using <code>write_csv()</code></li>
+<li>Load the libraries we need.</li>
+<li>Read in the data file – using the <code>read_csv()</code> function.</li>
+<li>Plot the distribution of reaction time (RT) observations – using <code>geom_density()</code> and <code>geom_rug()</code>.</li>
+<li>Take a look at <code>ggplot()</code> refernece information and experiment with alternative visualizations.</li>
+<li>Filter observations by setting conditions on RT – using <code>filter()</code>.</li>
+<li>Check the impact of filtering by counting the number of observations – using <code>length()</code></li>
+<li>Visualize the distribution of the filtered data.</li>
+<li>Experiment to examine the impact of setting different thresholds to filter observations</li>
+<li>Transform RT – using <code>log10()</code>.</li>
+<li>Visualize the distribution of log10 transformed filtered RTs.</li>
+<li>Visualize the distribution of log10 RTs for each individual – using <code>facet_wrap</code>
+<code>write_csv()</code>, as seen in Figure <a href="psyc402-part-2-week-19.html#fig:density-per-child">4.1</a>.</li>
+<li>Experiment with altering the visualization.</li>
+<li>Examine what the distributon of RTs looks like for each stimulus item.</li>
 </ol>
-<p>Second, we work on our understanding and practical skills in modeling multilevel structured data.
-This part <em>is</em> essential to your attainment of our learning objectives.</p>
-<ol start="9" style="list-style-type: decimal">
-<li>Read in the pre-prepared data – using <code>read_csv()</code> and defining <code>col_types</code> as we do so</li>
-<li>Visualizing effects with scatterplots – using <code>geom_point()</code> and <code>geom_smooth()</code></li>
-<li>Modeling effects while ignoring grouping – using <code>lm()</code></li>
-<li>Visualizing how effects may differ between groups (here, between participants) – using <code>facet_wrap()</code></li>
-<li>Fitting linear mixed-effects models – using <code>lmer()</code></li>
-<li>Learning to fit mixed-effects models with different kinds of random effects structure, examining the impact of these differences in structure</li>
-<li>Taking into account random effects associated with differences between participants, as well as differences between stimuli</li>
+<div class="figure"><span id="fig:density-per-child"></span>
+<img src="03-PSYC402-03-mixed_files/figure-html/density-per-child-1.png" alt="Distribution of log10 RTs, for each participant in the ML dataset, with participant data shown using density plots, ordered by average logRT per person; the red line indicates the overall mean log RT" width="100%" />
+<p class="caption">
+Figure 4.1: Distribution of log10 RTs, for each participant in the ML dataset, with participant data shown using density plots, ordered by average logRT per person; the red line indicates the overall mean log RT
+</p>
+</div>
+<p>Second, I then walk through a sequence of tasks where I show you how to fit and compare a series of models.</p>
+<ol start="14" style="list-style-type: decimal">
+<li>Consider a linear model of the effect of word frequency on RT, then examine the impact of other potential predictors.</li>
+<li>Fit a linear mixed-effects model to estimate the effect of frequency on log RT while taking into account random effects – using <code>lmer()</code>.</li>
+<li>Fit a linear mixed-effects models with varying random effects.</li>
+<li>Compare the different models – using <code>anova()</code>.
+18.-19. Examine whether random slopes effects are required.</li>
+<li>Get p-values for fixed effects estimates – using <code>lmerTest</code>.</li>
 </ol>
-<p>In the answers version of the workbook, I will provide optional extension exercises you can use to develop your coding skills, showing how I produced the plots in the slides and the book chapter.</p>
+<p>I think the important bit for your development is located in <code>Step 7: run your own sequence of lmer models</code></p>
+<p><strong>Try to run a series of models in which the fixed effects variable is something different i.e. use a different word property, or properties.</strong></p>
+<p>Third, the last section of the workbook shows you how to reproduce the plots in the chapter and slides.
+This is optional, and provided for your interest, only.</p>
+<p>To produce the plots, I adapted Tristan Mahr’s code, from his very useful blogpost (borrowed, with thanks):
+<a href="https://www.tjmahr.com/plotting-partial-pooling-in-mixed-effects-models/" class="uri">https://www.tjmahr.com/plotting-partial-pooling-in-mixed-effects-models/</a></p>
 </div>
 <div id="the-data-we-will-work-with-ml" class="section level3" number="4.2.6">
 <h3><span class="header-section-number">4.2.6</span> The data we will work with: ML</h3>
