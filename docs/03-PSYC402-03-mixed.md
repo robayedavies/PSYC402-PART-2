@@ -4,19 +4,49 @@ output:
   pdf_document: default
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+
+
+
+```
+## Loading required package: Matrix
 ```
 
-```{r libraries, echo=FALSE}
-library(broom)
-library(gridExtra)
-library(lme4)
-library(tidyverse)
+```
+## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──
 ```
 
-```{r readin, echo=FALSE}
-ML.all <- read_csv("subjects.behaviour.words-310114.csv")
+```
+## ✓ ggplot2 3.3.5     ✓ purrr   0.3.4
+## ✓ tibble  3.1.2     ✓ dplyr   1.0.7
+## ✓ tidyr   1.1.3     ✓ stringr 1.4.0
+## ✓ readr   1.4.0     ✓ forcats 0.5.1
+```
+
+```
+## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## x dplyr::combine() masks gridExtra::combine()
+## x tidyr::expand()  masks Matrix::expand()
+## x dplyr::filter()  masks stats::filter()
+## x dplyr::lag()     masks stats::lag()
+## x tidyr::pack()    masks Matrix::pack()
+## x tidyr::unpack()  masks Matrix::unpack()
+```
+
+
+```
+## 
+## ── Column specification ────────────────────────────────────────────────────────
+## cols(
+##   .default = col_double(),
+##   subjectID = col_character(),
+##   Test = col_character(),
+##   Gender = col_character(),
+##   Subject = col_character(),
+##   item_name = col_character(),
+##   item_type = col_character(),
+##   SUBTLWF = col_number()
+## )
+## ℹ Use `spec()` for the full column specifications.
 ```
 
 > Rob Davies

@@ -48,3 +48,16 @@ fig:freqperchildlm
 fig:pitemsints
 the-data-we-will-work-with-cp-reading-study
 answers
+psyc402-part-2-week-19
+welcome-2
+introductory-discussion-1
+critical-idea-1
+targets-2
+resources-for-you-2
+lectures-video-recordings-2
+book-chapter-2
+pre-lab-activity-1-get-your-files-ready-for-the-lab-class-2
+lab-activity-2
+tasks-2
+the-data-we-will-work-with-ml
+references-2
