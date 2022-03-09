@@ -66,3 +66,4 @@ we-want-to-develop-the-capacity-to-work-practically-in-r-with-mixed-effects-mode
 we-want-to-develop-the-capacity-to-talk-about-and-present-the-results-of-mixed-effects-models
 fig:density-per-child
 fig:no-vs-complete-vs-partial
+answers-1

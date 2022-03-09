@@ -315,6 +315,14 @@ This part *is* essential to your attainment of our learning objectives.
 
 In the answers version of the workbook, I will provide optional extension exercises you can use to develop your coding skills, showing how I produced the plots in the slides and the book chapter.
 
+### Answers
+
+You can now download the answers version of the practical activity workbook script as: [402-02-mixed-workbook-with-answers.R](files/week-18/402-02-mixed-workbook-with-answers.R).
+
+There is an extension section which shows you code for how I produced plots, for the chapter and slides, in which I present the way estimates deviate from population or average estimates of intercepts or slopes.
+
+If you have any questions, please post them to the Moodle discussion forum, or to the Friday Q&A slido.
+
 ### The data we will work with: CP reading study
 
 This week, we will be working with the **CP reading study** dataset.
