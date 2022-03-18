@@ -73,3 +73,10 @@ resources-for-you-3
 lectures-video-recordings-3
 book-chapter-3
 pre-lab-activity-1-get-your-files-ready-for-the-lab-class-3
+lab-activity-3
+tasks-3
+the-data-we-will-work-with-the-ricketts-word-learning-study
+references-3
+post-lab-activity
+pre-lab-activity-get-your-files-ready-for-the-lab-class
+objectives
