@@ -27,214 +27,31 @@ ML.all <- read_csv("subjects.behaviour.words-310114.csv")
 
 Welcome to our overview of the materials and guidance you will work with in **PSYC402 Week 20** for the **04-glmm** class.
 
-<!-- As we saw in the **Introduction to mixed-effects models** (for the `02-mixed` class), many Psychologists conduct studies where it is not sensible to think of observations as being nested (Baayen, Davidson, \& Bates, 2008).  -->
-<!-- We shall work with the **ML word recognition study** dataset, which has a structure similar to the CP study data that we worked with previously. -->
-<!-- Again, the core concern is that the data come from a study with a **repeated-measures design** where the experimenter presented multiple stimuli for response to each participant, for several participants, so that we have multiple observations for each participant and multiple observations for each stimulus. -->
-<!-- Getting practice with this kind of data will help you to easily recognize what you have got when you see it in your own work. -->
+We have been discussing how we can use Linear Mixed-effects models to analyze multilevel structured data, the kind of data that we commonly acquire in experimental psychological studies, for example, when our studies have repeated measures designs. 
+The use of Linear Mixed-effects models is appropriate where the outcome variable is a continuous numeric variable like reaction time.
+In this chapter, we extend our understanding and skills by moving to examine data where the outcome variable is categorical: this is a context that requires the use of **Generalized Linear Mixed-effects Models (GLMMs)**. 
 
-<!-- We shall analyse the outcome variable in relation to: -->
+We will begin by looking at the motivations for using GLMMs.
+We will then look at a practical example of a GLMM analysis, in an exploration in which we shall reveal some of the challenges that can arise in such work.
+The R code to do the modeling is very similar to the code we have used before. 
+The way we can understand the models is also similar but *with one critical difference*.
+We start to understand that difference here.
 
-<!-- \begin{description} -->
-<!-- \item[fixed effects] -->
-<!-- the impact of independent variables like participant reading skill or word frequency -->
-<!-- \item[random effects] -->
-<!-- the impact of random or unexplained differences between participants and also between stimuli -->
-<!-- \end{description} -->
+## Objectives
 
-<!-- In this webpage, I extract and present an outline taster summary (a little re-ordered) of a second chapter written for the course. -->
-<!-- Please go to the chapter for the authoritative version of the full text: [03-mixed.pdf](files/week-19/03-mixed.pdf). -->
+The aims of the lab session work are to:
 
-<!-- ### Introductory discussion -->
+- understand the reasons for using Generalized Linear Mixed-effects models (GLMMs) when we analyze discrete outcome variables;
+- recognize the limitations of alternative methods for analyzing such outcomes;
+- practice running GLMMs with varying random effects structures;
+- practice reporting the results of GLMMs, including through the use of model plots.
 
-<!-- We are going to respond to the multilevel (or crossed random effects) structure in the data by using linear mixed-effects models to analyze the data. -->
-<!-- This week, we are going to look at what mixed-effects models do from a **new perspective**. -->
+My recommendations for learning are:
 
-<!-- Our concern will be with different ways of thinking about why mixed-effects models are superior to linear models where data have a multilevel structure. -->
-<!-- Mixed-effects models tend to be more accurate in this (very common) situation because of what is called *partial pooling* and *shrinkage* or *regularization*. -->
-<!-- We use our practical example to explore these ideas. -->
-
-<!-- Figure \@ref(fig:no-vs-complete-vs-partial) presents a grid or trellis of plots, one plot per person. -->
-<!-- To draw the plot, I adapted code written by TJ Mahr: -->
-
-<!-- <https://www.tjmahr.com/plotting-partial-pooling-in-mixed-effects-models/> -->
-
-<!-- In each plot, you can see points corresponding to the RT of each response made by a participant to a stimulus word. -->
-<!-- In all plots, the pink line represents the *complete pooling* data model estimate of the effect of frequency on response RTs. -->
-<!-- In each plot, the green line represents the effect of frequency estimated using just the data for each participant, the *no pooling* estimates. -->
-<!-- In the plots, we also see blue lines that represent the mixed-effects model *partial pooling* estimates. -->
-
-<!-- ```{r no-vs-complete-vs-partial, warning = FALSE, message = FALSE, echo = FALSE, fig.height=8.5, fig.width=6, out.width='95%', fig.cap="Plot showing the relationship between logRT and log frequency (LgSUBTLCD) separately for each participant; pink line shows the complete pooling estimate green line shows the no-pooling estimate; and blue line shows the linear mixed-effects model partial pooling estimate"} -->
-
-<!-- ####################################################################################### -->
-
-<!-- # ML.all <- read_csv("subjects.behaviour.words-310114.csv") -->
-<!-- ML.all.correct <- -->
-<!--   filter(ML.all, RT >= 200) -->
-<!-- ML.all.correct$logrt <- log10(ML.all.correct$RT) -->
-
-<!-- # -- mixed-effects models represent partial pooling of data -->
-
-<!-- # -- we fit a separate line for each cluster of data, one for each participant  -->
-<!-- # -- the lmList() function in lme4 automates this process -->
-<!-- df_no_pooling <- lmList(logrt ~ -->
-
-<!--                           LgSUBTLCD | subjectID, ML.all.correct) %>%  -->
-<!--   coef() %>%  -->
-<!--   # Subject IDs are stored as row-names. Make them an explicit column -->
-<!--   rownames_to_column("subjectID") %>%  -->
-<!--   rename(Intercept = `(Intercept)`, Slope_frequency = LgSUBTLCD) %>%  -->
-<!--   add_column(Model = "No pooling") -->
-
-<!-- # -- inspect the tibble produced by these lines of code -->
-<!-- # summary(df_no_pooling) -->
-
-<!-- # -- make the subjectID and model label vectors a factor -->
-<!-- df_no_pooling$subjectID <- as.factor(df_no_pooling$subjectID) -->
-<!-- df_no_pooling$Model <- as.factor(df_no_pooling$Model) -->
-
-<!-- # -- in contrast, we might consider a complete pooling model where all the  -->
-<!-- # information from the participants is combined together -->
-<!-- # -- we fit a single line for all data -->
-
-<!-- # -- fit a model on all the data pooled together -->
-<!-- m_pooled <- lm(logrt ~ LgSUBTLCD, ML.all.correct)  -->
-
-<!-- # -- repeat the intercept and slope terms for each participant -->
-<!-- df_pooled <- data_frame( -->
-<!--   Model = "Complete pooling", -->
-<!--   subjectID = unique(ML.all.correct$subjectID), -->
-<!--   Intercept = coef(m_pooled)[1],  -->
-<!--   Slope_frequency = coef(m_pooled)[2]) -->
-
-<!-- # -- inspect -->
-<!-- # summary(df_pooled) -->
-
-<!-- # -- make the model label vector a factor -->
-<!-- df_pooled$Model <- as.factor(df_pooled$Model) -->
-
-<!-- # -- we can compare these two approaches -->
-<!-- # -- instead of calculating the regression lines with stat_smooth(), we can use  -->
-<!-- # geom_abline() to draw the lines from our dataframe of intercept and slope  -->
-<!-- # parameters -->
-
-<!-- # -- join the raw data so we can use plot the points and the lines -->
-<!-- # df_models <- bind_rows(df_pooled, df_no_pooling) %>%  -->
-<!-- #   left_join(ML.all.correct, by = "subjectID") -->
-
-<!-- # -- we fit a mixed-effects model including the fixed effects of the intercept and the frequency effect -->
-<!-- # -- as well as the random effects due to differences between participants (subject ID) in intercepts or -->
-<!-- # in the slope of the frequency effect, as well as differences between items (item_name) in intercepts -->
-
-<!-- ML.all.correct.lmer  <- lmer(logrt ~ -->
-
-<!--                                LgSUBTLCD + (LgSUBTLCD + 1|subjectID) + (1|item_name),      -->
-
-<!--                              data = ML.all.correct, REML = FALSE) -->
-<!-- # summary(ML.all.correct.lmer) -->
-
-<!-- # -- to visualize these estimates, we extract each participant’s intercept and slope using coef() -->
-
-<!-- # -- make a dataframe with the fitted effects -->
-<!-- df_partial_pooling <- coef(ML.all.correct.lmer)[["subjectID"]] %>%  -->
-<!--   rownames_to_column("subjectID") %>%  -->
-<!--   as_tibble() %>%  -->
-<!--   rename(Intercept = `(Intercept)`, Slope_frequency = LgSUBTLCD) %>%  -->
-<!--   add_column(Model = "Partial pooling") -->
-
-<!-- # -- inspect the tibble produced by these lines of code -->
-<!-- # summary(df_partial_pooling) -->
-
-<!-- # -- make the subjectID and model label vectors both factors -->
-<!-- df_partial_pooling$subjectID <- as.factor(df_partial_pooling$subjectID) -->
-<!-- df_partial_pooling$Model <- as.factor(df_partial_pooling$Model) -->
-
-<!-- # -- update the previous plot by using a dataset consisting of of all three models’ estimates -->
-
-<!-- df_models <- rbind(df_pooled, df_no_pooling, df_partial_pooling) %>% -->
-<!--   left_join(ML.all.correct, by = "subjectID") -->
-
-<!-- # -- inspect the differences between the datasets -->
-<!-- # summary(df_pooled) -->
-<!-- # summary(df_no_pooling) -->
-<!-- # summary(df_partial_pooling) -->
-<!-- # summary(ML.all.correct) -->
-<!-- # summary(df_models) -->
-
-<!-- # -- replace the data-set used in the last plot with this new data-set -->
-<!-- # -- and regenerate the plot -->
-<!-- # -- we  produce a plot showing the no-pooling, complete-pooling and partial-pooling (mixed effects) -->
-<!-- # estimates -->
-
-<!-- # # pdf("ML-data-frequency-no-or-complete-or-partial-pooling.pdf", w = 6, h = 8) -->
-
-<!-- p_model_comparison <- ggplot(df_models) + -->
-<!--   aes(x = LgSUBTLCD, y = logrt) + -->
-<!--   # Set the color mapping in this layer so the points don't get a color -->
-<!--   geom_point(alpha = .05) + -->
-<!--   geom_abline(aes(intercept = Intercept, -->
-<!--                   slope = Slope_frequency, -->
-<!--                   color = Model), -->
-<!--               size = .75) + -->
-<!--   facet_wrap(~ subjectID) + -->
-<!--   scale_x_continuous(breaks = 1.5:4 * 1) + -->
-<!--   theme_bw() + -->
-<!--   theme(legend.position = "top") -->
-
-<!-- p_model_comparison -->
-
-<!-- # # dev.off() -->
-<!-- ``` -->
-
-<!-- ### Critical idea -->
-
-<!-- **Shrinkage or regularization** means that models of data should be excited by the data but not *too* excited. -->
-
-<!-- ### Targets -->
-
-<!-- We are probably now at a stage, in the development of our skills and understanding, where we can be more specific about our targets for learning. -->
-<!-- We have three components of the capacity we seek to develop. -->
-<!-- These components include the capacity to understand mixed-effects models, the capacity to work with them practically in R, and the capacity to present the results. -->
-
-<!-- The development of skills and understanding in relation to each component will travel at different speeds, for different people, and, within any person, at different speeds for different components. -->
-<!-- We have *already* begun to develop some of the capacities I outline. -->
-<!-- We will strengthen our understanding and our practical skills in the class for which this webpage, and the associated resources, are provided. -->
-<!-- And we will will continue to develop both understanding and skills in the next class. -->
-
-<!-- Remember, my advice has been that we should seek to progress in our development step-by-step. -->
-<!-- Remember, **we need to be patient with ourselves**. -->
-<!-- Our understanding or the extent of our practical capacities will not necessarily match our own internal evaluation. -->
-<!-- In other words, we might not be satisfied with our understanding but, still, our understanding might be satisfactory. -->
-<!-- I want to remind you that these are challenging materials. -->
-<!-- For these reasons, I specify what we are aiming to develop in terms of what we can *do*. -->
-
-<!-- #### We want to develop the capacity to **understand** mixed-effects models -->
-
-<!-- This involves the capacity to: -->
-
-<!-- 1. recognize where data have a multilevel structure; -->
-<!-- 2. recognize where multilevel or mixed-effects models are required; -->
-<!-- 3. distinguish the elements of a mixed-effects model, including fixed effects and random effects; -->
-<!-- 4. be able to explain how random effects can be understood in terms of random differences (or deviations), between groups or classes or individuals, in intercepts or slopes; -->
-<!-- 5. be able to explain how random effects can be understood in terms of variances, as a means to account for random differences between groups or classes or individuals in intercepts or slopes; -->
-<!-- 6. be able to explain how mixed-effects models work better than linear models, for multilevel structured data, because they take into account variances associated with random differences; -->
-<!-- 7.and be able to explain how mixed-effects models work better because they allow partial-pooling of estimates, using both information from the whole data set and information from group or class or individual specific data. -->
-
-<!-- #### We want to develop the capacity to work practically in R with mixed-effects models -->
-
-<!-- This involves the capacity to: -->
-
-<!-- 1. be able to specify a mixed-effects model in `lmer()` code; -->
-<!-- 2. be able to identify how the mixed-effects model code varies, depending on the kinds of random effects that are assumed; -->
-<!-- 3. be able to identify the elements of the output or results that come from an `lmer()` mixed-effects analysis; -->
-<!-- 4. be able to interpret the fixed-effects estimates; -->
-<!-- 5. and be able to interpret the random effects estimates, both variance and covariance estimates. -->
-
-<!-- #### We want to develop the capacity to talk about and present the results of mixed-effects models -->
-
-<!-- This involves the capacity to: -->
-
-<!-- 1. be able to describe in words and summary tables the results of a mixed-effects model; -->
-<!-- 2. be able to visualize the effects estimates from a mixed-effects model. -->
+- run generalized linear mixed-effects models of demonstration data;
+- run generalized linear mixed-effects models of alternate data sets;
+- play with the .R code used to create examples for the lecture;
+- and edit example code to create alternate visualizations.
 
 ## Resources for you
 
@@ -250,7 +67,7 @@ I have prepared materials that I suggest you use in this order:
 
 1. Take a look at the lecture slides, watch the lecture video. The lecture is designed to work *only* as an outline summary of the materials. Learning will work best if you read the book chapter I wrote on the topic, and work through the exercises in the workbook.R
 2. Read the book chapter, to develop understanding.
-2. Download the week 19 files, and work your way throught the workbook.R, guided by the book chapter.
+2. Download the week 20 files, and work your way through the workbook.R, guided by the book chapter.
 
 - **In the session**
 
@@ -261,6 +78,8 @@ I have prepared materials that I suggest you use in this order:
 4. Bring your questions to the Q&A session or post questions to the discussion forum.
 
 Be patient with yourself and with the materials. The topic is challenging because it is new but it is very important. The plan is to build up understanding and analysis skill step by step.
+
+5. As an opportunity to gain further experience, I provide a **post-lab** activity, see following.
 
 ### Lectures: video recordings
 
@@ -285,7 +104,9 @@ The chapter is useful to you in two ways:
 1. I use text and visualization to explain the core ideas in depth;
 2. I take you through each part of the code that you need to use, step-by-step, for your development of practical skills in data tidying, visualization, and analysis.
 
-### Pre-lab activity 1: Get your files ready for the lab class
+### Pre-lab activity: Get your files ready for the lab class
+
+Download the [04-glmm.zip](files/week-20/04-glmm.zip) files you need.
 
 Activities in the class that goes with this chapter are associated with the following data file:
 
@@ -297,142 +118,88 @@ And the .R code file:
 
 You will use `402-04-GLMM-workbook.R` in the lab activity.
 
-<!-- ### Lab activity -->
+### Lab activity
 
-<!-- We will take things step-by-step. -->
+We will take things step-by-step.
 
-<!-- The workbook has three sets of steps: -->
+#### Tasks
 
-<!-- - First, I show you how to prepare data for analysis -- just run the code and do the exercises; -->
-<!-- - Second, I walk through a sequence of tasks where I show you how to fit and compare a series of models -- again, just run the code and do the exercises; -->
-<!-- - the critical step is Step 7, where I ask you to follow the examples, running your own series of models but with your selection of variables; -->
-<!-- - Third, finally, I show you how to reproduce some of the key plots from the book chapter and slides, this is for your information, if you are interested, and is optional. -->
+In the activity, we are going to work through the following tasks.
 
-<!-- ### Tasks -->
+First, we **prepare the data** for analysis.
 
-<!-- In the activity, we are going to work through the following tasks. -->
+1. Load the libraries we need.
+2. Read in the data file -- using the `read_csv()` function.
+3. Inspect the data -- using `summary()`.
+4. We begin to develop awareness of how we approach generalized linear models by fitting some simple models -- using `glm()`.
+5. We examine how the different levels of categorical variables are coded, and change the coding -- using `contrasts()` and `contr.sum()`.
 
-<!-- First, I am going to show you **how to prepare data** for analysis. -->
+Notice that identifying how categorical variables are coded, and modifying the coding as required, is often essential to working with research data from studies involving experimental manipulations or group contrasts.
 
-<!-- 1. Load the libraries we need. -->
-<!-- 2. Read in the data file -- using the `read_csv()` function. -->
-<!-- 3. Plot the distribution of reaction time (RT) observations -- using `geom_density()` and `geom_rug()`. -->
-<!-- 4. Take a look at `ggplot()` refernece information and experiment with alternative visualizations. -->
-<!-- 5. Filter observations by setting conditions on RT -- using `filter()`. -->
-<!-- 6. Check the impact of filtering by counting the number of observations -- using `length()` -->
-<!-- 7. Visualize the distribution of the filtered data. -->
-<!-- 8. Experiment to examine the impact of setting different thresholds to filter observations -->
-<!-- 9. Transform RT -- using `log10()`.  -->
-<!-- 10. Visualize the distribution of log10 transformed filtered RTs. -->
-<!-- 11. Visualize the distribution of log10 RTs for each individual -- using `facet_wrap` -->
-<!-- `write_csv()`, as seen in Figure \@ref(fig:density-per-child). -->
-<!-- 12. Experiment with altering the visualization. -->
-<!-- 13. Examine what the distributon of RTs looks like for each stimulus item. -->
+A useful set of tools for dealing with categorical variables can also be found in the `forcats` library in `tidyverse`.
 
-<!-- ```{r density-per-child, echo=FALSE, fig.cap = 'Distribution of log10 RTs, for each participant in the ML dataset, with participant data shown using density plots, ordered by average logRT per person; the red line indicates the overall mean log RT', warning=FALSE, message=FALSE, out.width='100%', fig.width=9, fig.height=9} -->
+<https://forcats.tidyverse.org>
 
-<!-- ML.all.correct <- filter(ML.all, RT >= 200) -->
+Second, we **begin our exploration** of Generalized Linear Mixed-effects Models (GLMMs) by fitting, and examining the results from, a random intercepts model.
 
-<!-- ML.all.correct$logrt <- log10(ML.all.correct$RT) -->
+6. We run the code to fit the model -- using `glmer()`.
+7. Visualize the modeled effect -- using either of two alternative approaches: using `plot_model()` or using `effect()`.
+8. Experiment by picking a different predictor variable to visualize.
+9. As an optional exercise, I invite you to examine how how to plot interaction effects -- using `plot_model()`; you will need to exploit the information presented in an online guide.
 
-<!-- ML.all.correct %>% -->
-<!--   mutate(mean_logrt = mean(logrt, na.rm = TRUE)) %>% -->
-<!--   ungroup() %>% -->
-<!--   mutate(subjectID = fct_reorder(subjectID, mean_logrt)) %>% -->
-<!--   ggplot(aes(x = logrt)) + -->
-<!--   geom_density(size = 1.25) + -->
-<!--   facet_wrap(~ subjectID) + -->
-<!--   geom_vline(xintercept = 2.778807, colour = "red", linetype = 2) + -->
-<!--   scale_x_continuous(breaks = c(2.5,3)) + -->
-<!--   ggtitle("Plot showing distribution of logRT for each participant; red line shows mean log10 RT") + -->
-<!--   theme_bw() -->
+Third, we move into a sequence of activities or exercises designed to expose how you might approach the challenge of fitting models incorporating random effects that are both warranted by the study design (as well as the likely structure of the data) and justified by model fit to data.
+I walk you through a sequence of tasks where I show you how to fit and compare a series of models.
+The models all have the same fixed effects: we will be comparing models varying in random effects.
 
-<!-- ``` -->
+10. Fit a minimal random intercepts model, then a maximal model with the full set of random intercepts, slopes and covariances that appear to be justifiable, given the study design for the example dataset. 
 
-<!-- Second, I then walk through a sequence of tasks where I show you how to fit and compare a series of models. -->
+**The maximal model will take a relatively long time (several seconds) to fit, so be patient.**
 
-<!-- 14. Consider a linear model of the effect of word frequency on RT, then examine the impact of other potential predictors. -->
-<!-- 15. Fit a linear mixed-effects model to estimate the effect of frequency on log RT while taking into account random effects -- using `lmer()`. -->
-<!-- 16. Fit a linear mixed-effects models with varying random effects. -->
-<!-- 17. Compare the different models -- using `anova()`. -->
-<!-- 18.-19. Examine whether random slopes effects are required. -->
-<!-- 20. Get p-values for fixed effects estimates -- using `lmerTest`. -->
+As part of this task, I will ask you to work through a series of variants of the model, so that you can see what it looks like when model variants do or do not converge.
 
-<!-- I think the important bit for your development is located in `Step 7: run your own sequence of lmer models` -->
+11. Compare the models with the *Likelihood Ratio Test* -- using `anova()`.
+12. Experiment a bit with the model specification code to see what key elements are doing -- looking at `glmerControl()` and `dummy()`.
 
-<!-- **Try to run a series of models in which the fixed effects variable is something different i.e. use a different word property, or properties.** -->
+#### The data we will work with: the Ricketts word learning study
 
-<!-- Third, the last section of the workbook shows you how to reproduce the plots in the chapter and slides. -->
-<!-- This is optional, and provided for your interest, only. -->
+We will be working with data collected for a study investigating word learning in children, reported by Ricketts, Dawson, and Davies (2021).
+You will see that the study design has both a repeated measures aspect because each child is asked to respond to multiple stimuli, and a longitudinal aspect because responses are recorded at two time points.
+Because responses were observed to multiple stimuli for each child, and because responses were recorded at multiple time points, the data have a multilevel structure.
+These features require the use of mixed-effects models for analysis.
 
-<!-- To produce the plots, I adapted Tristan Mahr's code, from his very useful blogpost (borrowed, with thanks): -->
-<!-- <https://www.tjmahr.com/plotting-partial-pooling-in-mixed-effects-models/> -->
+We will see, also, that the study involves the factorial manipulation of learning conditions.
+Children were taught 16 novel words in a $2 \times 2$ factorial design. 
+The presence of orthography (orthography absent vs. orthography present) was manipulated within participants: for all children, eight of the words were taught with orthography present and eight with orthography absent. 
+Instructions (incidental vs. explicit) were manipulated between participants such that children in the explicit condition were alerted to the presence of orthography whereas children in the incidental condition were not.
 
-<!-- ### The data we will work with: ML -->
+Some of the variables included in the .csv file are listed, following, with information about value coding or calculation.
 
-<!-- We will be working with the **ML word recognition study** dataset. -->
-<!-- The focus of our interest is on the ways in which participant attributes (like age) or word properties (like frequency) influence the speed of response in a task measuring the ability to recognize visually presented English words. -->
+- `Participant` -- Participant identity codes were used to anonymize participation.
+- `Time` -- Test time was coded 1 (time 1) or 2 (time 2). For the Study 1 longitudinal data, it can be seen that each participant identity code is associated with observations taken at test times 1 and 2.
+- `Instructions` -- Variable coding for whether participants undertook training in the *explicit* or *incidental* conditions.
+- `Word` -- Letter string values showing the words presented as stimuli to the children.
+- `Orthography` -- Variable coding for whether participants had seen a word in training in the orthography *absent* or *present* conditions.
+- `Consistency-H` -- Calculated orthography-to-phonology consistency value for each word.
+- `zConsistency-H` -- Standardized Consistency H scores
+- `Score` -- Outcome variable -- for the orthographic post-test, responses were scored as: `1` correct, if the target spelling was produced in full; or `0` incorrect, if the target spelling was not produced
 
-<!-- ML examined visual word recognition in younger and older adults using the lexical decision task. -->
-<!-- Lexical decision is a very popular technique for examining word recognition, especially in adults.  -->
-<!-- While not every Psychology student will be interested in word recognition, or reading, everyone should understand that tasks like lexical decision are similar to a range of other tasks used in experimental psychological science. -->
-<!-- The critical features of the study are that we have an outcome -- a decision response -- observed multiple times (for each stimulus) for each participant.  -->
-<!-- We shall be analyzing the speed of response, reaction time (RT), measured in milliseconds (ms). -->
+### Post-lab activity
 
-<!-- In the lexical decision task, participants completed a series of 320 trials. -->
-<!-- In each trial, they were presented with a stimulus, a string of letters, that was either a real word (e.g., 'car') or a made-up or non-word (e.g., 'cas'). -->
-<!-- There were 160 word and 160 non-word stimuli. -->
-<!-- Each stimulus was presented one at a time on a computer screen. -->
-<!-- Participants were required to respond to the stimulus by pressing a button to indicate either that they thought the stimulus was a word (they knew) or that they thought it was a non-word. -->
-<!-- Each sequence of events, in which a stimulus was presented and a response was recorded, is known as a *trial*. -->
-<!-- The critical outcome measure was the reaction time of each response: the interval of time from the moment the stimulus was first presented (the stimulus onset) to the moment the response was made (the response onset). -->
+Notice that when you download the [04-glmm.zip](files/week-20/04-glmm.zip) files you will find that there are two files you can use for post-lab extension work=.
 
-<!-- The total number of participants for this study was 39, including a group of younger adults and a group of older adults. -->
-<!-- Information was collected about the participants' age, education and gender. -->
-<!-- In addition, participants were asked to complete ability measures (TOWRE sight word and phonemic tests, Torgesen et al., 1999) and a measure of reading experience (Author Recognition Test, ART, Masterson \& Hayes, 2007). -->
+- `402-04-GLMM-exercise-gavagai-data-analysis-notes.R`
+- `noun-verb-learning-study.csv`
 
-<!-- In summary, ML collected data on: lexical decision task response reaction times (RTs) and accuracy; information on lexical decision stimulus items, including variables like the length or frequency of words (values taken from the English Lexicon Project, Balota et al., 2007); and information on participants, including age, reading ability and reading experience. -->
+It is very helpful, when learning new data analysis methods, to examine how you use the *same* method in *different* contexts, with different study designs, research questions, datasets, and challenges.
+You can use these resources, optionally, to extend your practice and deepen your understanding, by exploring the analysis of the noun-verb learning "Gavagai" study data (Monaghan et al., 2015).
+The .R analysis script is extensively commented.
+You can find further information about the study in the script or in the associated published article.
 
-<!-- The ML study data includes the following variables that we will work with (as well as some you can ignore). -->
-<!-- More information about the study, and the research context for the study, including the research questions, can be found in the book chapter. -->
+## References
 
-<!-- *Identifying variables* -->
+Monaghan, P., Mattock, K., Davies, R. A., \& Smith, A. C. (2015). Gavagai is as gavagai does: Learning nouns and verbs from Cross‐Situational statistics. Cognitive Science, 39, 1099-1112.
 
-<!-- * `subjectID` -- identifying code for participants -->
-<!-- * `item_name` -- words presented as stimuli -->
-<!-- * `item_number` -- identifying code for words presented -->
+Ricketts, J., Dawson, N., \& Davies, R. (2021). The hidden depths of new word knowledge: Using graded measures of orthographic and semantic learning to measure vocabulary acquisition. *Learning and Instruction*, 74, 101468.
 
-<!-- *Response variables* -->
-
-<!-- * `RT` -- response reaction time (ms), for responses to words -->
-
-<!-- *Subject variables* -->
-
-<!-- * `Age` -- in years -->
-<!-- * `Gender` -- coded M (male), F (female) -->
-<!-- * `TOWRE_wordacc` -- word reading skill, words read correctly (out of 104) -->
-<!-- * `TOWRE_nonwordacc` -- nonword reading skill, nonwords (made up words) read correctly (out of 63) -->
-<!-- * `ART_HRminusFR` -- reading experience score -->
-
-<!-- *Item variables* -->
-
-<!-- * `Length` -- word length, in letters -->
-<!-- * `Ortho_N` -- orthographic neighbourhood size, how many other words in English a stimulus word looks like -->
-<!-- * `OLD` -- orthographic Levenshtein distance, how many letter edits (addition, deletion or substitution) it would take to make a stimulus word look like another English word (a measure of orthographic neighbourhood) (Yarkoni et al., 2008) -->
-
-<!-- * `BG_Sum, BG_Mean, BG_Freq_By_Pos` -- measures of how common are pairs of letters that compose stimulus words -->
-<!-- * `SUBTLWF, LgSUBTLWF,	SUBTLCD, LgSUBTLCD` -- measures of how common stimulus words are, taken from the SUBTLEX corpus analysis of word frequency (Brysbaert and New, 2009) -->
-
-<!-- ## References -->
-
-<!-- Baayen, R. H., Davidson, D. J., \& Bates, D. M. (2008). Mixed-effects modeling with crossed random effects for subjects and items. *Journal of Memory and Language*, 59, 390-412. -->
-
-<!-- Balota, D. A., Yap, M. J., Hutchison, K. A., Cortese, M. J., Kessler, B., Loftis, B., . . . Treiman, R. (2007). The English lexicon project. *Behavior Research Methods*, 39, 445– 459. http://dx.doi.org/10.3758/BF03193014 -->
-
-<!-- Brysbaert, M., \& New, B. (2009). Moving beyond Kucˇera and Francis: A critical evaluation of current word frequency norms and the introduction of a new and improved word frequency measure for American English. *Behavior Research Methods*, 41, 977–990. http://dx.doi.org/10.3758/ BRM.41.4.977 -->
-
-<!-- Masterson, J., \& Hayes, M. (2007). Development and data for UK versions of an author and title recognition test for adults. *Journal of Research in Reading*, 30, 212–219. http://dx.doi.org/10.1111/j.1467-9817.2006 .00320.x -->
-
-<!-- Torgesen, J. K., Wagner, R. K., \& Rashotte, C. A. (1999). *TOWRE Test of word reading efficiency*. Austin, TX: Pro-ed. -->
-
-<!-- Yarkoni, T., Balota, D., \& Yap, M. (2008). Moving beyond Coltheart’s N: A new measure of orthographic similarity. *Psychonomic Bulletin & Review*, 15, 971–979. http://dx.doi.org/10.3758/PBR.15.5.971 -->
+Notice that data and code shared with the Ricketts et al. (2021) manuscript can be found at the publication webpage:
+<https://www.sciencedirect.com/science/article/pii/S095947522100027X>
