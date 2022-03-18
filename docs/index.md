@@ -1,7 +1,7 @@
 ---
 title: "PSYC402 Statistics for Psychologists -- Part 2"
 author: "Rob Davies"
-date: "2022-03-09"
+date: "2022-03-18"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book

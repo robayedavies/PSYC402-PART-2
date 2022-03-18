@@ -67,3 +67,9 @@ we-want-to-develop-the-capacity-to-talk-about-and-present-the-results-of-mixed-e
 fig:density-per-child
 fig:no-vs-complete-vs-partial
 answers-1
+psyc402-part-2-week-20
+welcome-3
+resources-for-you-3
+lectures-video-recordings-3
+book-chapter-3
+pre-lab-activity-1-get-your-files-ready-for-the-lab-class-3
